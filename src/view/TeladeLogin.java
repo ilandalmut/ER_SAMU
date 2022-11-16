@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import model.ModuloConexao;
 import javax.swing.JTextField;
 
+
 public class TeladeLogin extends javax.swing.JFrame {
 
     Connection  conexao = null;
@@ -19,7 +20,7 @@ public class TeladeLogin extends javax.swing.JFrame {
     public TeladeLogin() {
         initComponents();
         conexao = ModuloConexao.connector();
-        status();
+        
         
     }
 
