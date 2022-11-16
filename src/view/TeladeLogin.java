@@ -8,6 +8,7 @@ package view;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import model.ModuloConexao;
+import javax.swing.JTextField;
 
 public class TeladeLogin extends javax.swing.JFrame {
 
@@ -39,16 +40,48 @@ public class TeladeLogin extends javax.swing.JFrame {
         }
     }
 }
+    public void logar(){
+    String sql = "select * from tb_usuarios where login_usuario = ? and senha_usuario = ?";
+            try{
+                pst = conexao.prepareStatement(sql);
+                pst.setString(1, txtLogin.getText());
+                pst.setString(2, txtSenha.getText());
+                
+                rs = pst.executeQuery();
+                
+                if(rs.next()){
+                    String perfil_usuario = rs.getString(5);
+                    if(perfil_usuario.equals ("admin")){
+                        TelaPrincipal principal = new TelaPrincipal();
+                        principal.setVisible(true);
+                        
+                        this.dispose();
+                    }
+                    if(perfil_usuario.equals ("user")){
+                        TelaPrincipal principal = new TelaPrincipal();
+                        principal.setVisible(true);
+                        
+                        this.dispose();
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Usuário/Senha inválidos");
+                    
+                }
+                
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, e);
+            }
+}
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         lblStatus = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        btlogar = new javax.swing.JLabel();
+        txtLogin = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        txtSenha = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -59,11 +92,14 @@ public class TeladeLogin extends javax.swing.JFrame {
 
         lblStatus.setText("Status");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btEntrar.png"))); // NOI18N
+        btlogar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btEntrar.png"))); // NOI18N
+        btlogar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btlogarMouseClicked(evt);
+            }
+        });
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/samu-192-logo.png"))); // NOI18N
-
-        jPasswordField1.setText("jPasswordField1");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
@@ -89,9 +125,9 @@ public class TeladeLogin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jPasswordField1, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addComponent(txtSenha, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(txtLogin, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btlogar, javax.swing.GroupLayout.Alignment.TRAILING))
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5))
@@ -107,17 +143,17 @@ public class TeladeLogin extends javax.swing.JFrame {
                         .addGap(39, 39, 39)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addComponent(jLabel2)))
                 .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
+                    .addComponent(btlogar)
                     .addComponent(lblStatus))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
@@ -125,6 +161,10 @@ public class TeladeLogin extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btlogarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btlogarMouseClicked
+        logar();
+    }//GEN-LAST:event_btlogarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -162,13 +202,13 @@ public class TeladeLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel btlogar;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblStatus;
+    private javax.swing.JTextField txtLogin;
+    private javax.swing.JPasswordField txtSenha;
     // End of variables declaration//GEN-END:variables
 }
