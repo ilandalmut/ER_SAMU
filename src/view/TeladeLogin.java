@@ -20,7 +20,7 @@ public class TeladeLogin extends javax.swing.JFrame {
     public TeladeLogin() {
         initComponents();
         conexao = ModuloConexao.connector();
-        
+       
         
     }
 
