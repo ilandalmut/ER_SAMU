@@ -34,11 +34,7 @@ public class TeladeLogin extends javax.swing.JFrame {
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, e);
         } finally {
-        try{
-            conexao.close();
-        } catch(SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
-        }
+        
     }
 }
     public void logar(){
