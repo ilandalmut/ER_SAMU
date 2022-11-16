@@ -101,7 +101,13 @@ public class TeladeLogin extends javax.swing.JFrame {
             }
         });
 
+        txtLogin.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtLogin.setMargin(new java.awt.Insets(2, 10, 2, 2));
+
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/samu-192-logo.png"))); // NOI18N
+
+        txtSenha.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtSenha.setMargin(new java.awt.Insets(2, 10, 2, 2));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
@@ -109,7 +115,7 @@ public class TeladeLogin extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel4.setText("Usuário");
+        jLabel4.setText("Login");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(51, 51, 51));
