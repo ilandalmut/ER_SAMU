@@ -90,6 +90,11 @@ public class TeladeLogin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ER SAMU-Login");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         lblStatus.setText("Status");
 
@@ -166,6 +171,10 @@ public class TeladeLogin extends javax.swing.JFrame {
     private void btlogarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btlogarMouseClicked
         logar();
     }//GEN-LAST:event_btlogarMouseClicked
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        status();
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments
