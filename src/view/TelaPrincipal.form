@@ -9,18 +9,21 @@
             <Property name="text" type="java.lang.String" value="Chamados"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+            <MenuItem class="javax.swing.JMenuItem" name="menuNovoChamado">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Novo Chamado"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuNovoChamadoActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
+            <MenuItem class="javax.swing.JMenuItem" name="menuGerenciarChamado">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Gerenciar Chamados"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuGerenciarChamadoActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -37,6 +40,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cadastrar Profissional"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem3ActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -45,6 +51,10 @@
             <Property name="text" type="java.lang.String" value="Relat&#xf3;rios"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menuRelMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuRelActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>
@@ -90,11 +100,11 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="btRel" alignment="0" min="-2" pref="194" max="-2" attributes="0"/>
                   <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton1" alignment="0" min="-2" pref="194" max="-2" attributes="0"/>
-                  <Component id="jButton2" alignment="0" min="-2" pref="194" max="-2" attributes="0"/>
+                  <Component id="btNovoChamado" alignment="0" min="-2" pref="194" max="-2" attributes="0"/>
+                  <Component id="btProfissionais" alignment="0" min="-2" pref="194" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jDesktopPane1" max="32767" attributes="0"/>
+              <Component id="desktop" max="32767" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
@@ -122,11 +132,11 @@
               </Group>
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jDesktopPane1" min="-2" max="-2" attributes="0"/>
+                  <Component id="desktop" min="-2" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Component id="jButton1" min="-2" pref="68" max="-2" attributes="0"/>
+                      <Component id="btNovoChamado" min="-2" pref="68" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jButton2" min="-2" pref="68" max="-2" attributes="0"/>
+                      <Component id="btProfissionais" min="-2" pref="68" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                       <Component id="btRel" min="-2" pref="68" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -138,7 +148,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="btNovoChamado">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="12" style="1"/>
@@ -149,7 +159,7 @@
         <Property name="text" type="java.lang.String" value="  Novo Chamado"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="btProfissionais">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="12" style="1"/>
@@ -160,7 +170,7 @@
         <Property name="text" type="java.lang.String" value="  Profissionais"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btProfissionaisActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btRel">
@@ -211,7 +221,7 @@
         <Property name="text" type="java.lang.String" value="00:00:00"/>
       </Properties>
     </Component>
-    <Container class="javax.swing.JDesktopPane" name="jDesktopPane1">
+    <Container class="javax.swing.JDesktopPane" name="desktop">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="e3" green="e3" id="Realce do Controle" palette="2" red="e3" type="palette"/>

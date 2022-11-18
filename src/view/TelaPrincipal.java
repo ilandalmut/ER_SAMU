@@ -30,18 +30,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btNovoChamado = new javax.swing.JButton();
+        btProfissionais = new javax.swing.JButton();
         btRel = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtUser = new javax.swing.JLabel();
         txtData = new javax.swing.JLabel();
-        jDesktopPane1 = new javax.swing.JDesktopPane();
+        desktop = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        menuNovoChamado = new javax.swing.JMenuItem();
+        menuGerenciarChamado = new javax.swing.JMenuItem();
         menuCad = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         menuRel = new javax.swing.JMenu();
@@ -56,16 +56,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-ambulance-24.png"))); // NOI18N
-        jButton1.setText("  Novo Chamado");
+        btNovoChamado.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btNovoChamado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-ambulance-24.png"))); // NOI18N
+        btNovoChamado.setText("  Novo Chamado");
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-grupo-de-usuários-30.png"))); // NOI18N
-        jButton2.setText("  Profissionais");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btProfissionais.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btProfissionais.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-grupo-de-usuários-30.png"))); // NOI18N
+        btProfissionais.setText("  Profissionais");
+        btProfissionais.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btProfissionaisActionPerformed(evt);
             }
         });
 
@@ -88,31 +88,36 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         txtData.setText("00:00:00");
 
-        jDesktopPane1.setBackground(java.awt.SystemColor.controlHighlight);
+        desktop.setBackground(java.awt.SystemColor.controlHighlight);
 
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout desktopLayout = new javax.swing.GroupLayout(desktop);
+        desktop.setLayout(desktopLayout);
+        desktopLayout.setHorizontalGroup(
+            desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 837, Short.MAX_VALUE)
         );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        desktopLayout.setVerticalGroup(
+            desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 586, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Chamados");
 
-        jMenuItem1.setText("Novo Chamado");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        menuNovoChamado.setText("Novo Chamado");
+        menuNovoChamado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                menuNovoChamadoActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenu1.add(menuNovoChamado);
 
-        jMenuItem2.setText("Gerenciar Chamados");
-        jMenu1.add(jMenuItem2);
+        menuGerenciarChamado.setText("Gerenciar Chamados");
+        menuGerenciarChamado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuGerenciarChamadoActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuGerenciarChamado);
 
         jMenuBar1.add(jMenu1);
 
@@ -120,12 +125,27 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuCad.setEnabled(false);
 
         jMenuItem3.setText("Cadastrar Profissional");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         menuCad.add(jMenuItem3);
 
         jMenuBar1.add(menuCad);
 
         menuRel.setText("Relatórios");
         menuRel.setEnabled(false);
+        menuRel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuRelMouseClicked(evt);
+            }
+        });
+        menuRel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuRelActionPerformed(evt);
+            }
+        });
         jMenuBar1.add(menuRel);
 
         jMenu4.setText("Sair");
@@ -142,10 +162,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btRel, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btNovoChamado, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btProfissionais, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jDesktopPane1))
+                .addComponent(desktop))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,11 +187,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addComponent(txtData)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(desktop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btNovoChamado, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btProfissionais, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(15, 15, 15)
                         .addComponent(btRel, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -182,23 +202,53 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btProfissionaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btProfissionaisActionPerformed
+        TelaCadastro profissional = new TelaCadastro();
+        profissional.setVisible(true);
+        desktop.add(profissional);
+    }//GEN-LAST:event_btProfissionaisActionPerformed
 
     private void btRelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRelActionPerformed
-        // TODO add your handling code here:
+        TelaRelatorio relatorio = new TelaRelatorio();
+        relatorio.setVisible(true);
+        desktop.add(relatorio);
     }//GEN-LAST:event_btRelActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    private void menuNovoChamadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNovoChamadoActionPerformed
+        TelaNovoChamado novoChamado = new TelaNovoChamado();
+        novoChamado.setVisible(true);
+        desktop.add(novoChamado);
+    }//GEN-LAST:event_menuNovoChamadoActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         Date data = new Date();
         DateFormat formatador = DateFormat.getDateInstance(DateFormat.DATE_FIELD);
         txtData.setText(formatador.format(data));
     }//GEN-LAST:event_formWindowActivated
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        TelaCadastro profissional = new TelaCadastro();
+        profissional.setVisible(true);
+        desktop.add(profissional);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void menuGerenciarChamadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGerenciarChamadoActionPerformed
+        TelaGerenciarChamados gerenciarChamado = new TelaGerenciarChamados();
+        gerenciarChamado.setVisible(true);
+        desktop.add(gerenciarChamado);
+    }//GEN-LAST:event_menuGerenciarChamadoActionPerformed
+
+    private void menuRelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuRelActionPerformed
+        TelaRelatorio relatorio = new TelaRelatorio();
+        relatorio.setVisible(true);
+        desktop.add(relatorio);
+    }//GEN-LAST:event_menuRelActionPerformed
+
+    private void menuRelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuRelMouseClicked
+        TelaRelatorio relatorio = new TelaRelatorio();
+        relatorio.setVisible(true);
+        desktop.add(relatorio);
+    }//GEN-LAST:event_menuRelMouseClicked
 
     /**
      * @param args the command line arguments
@@ -236,19 +286,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btNovoChamado;
+    private javax.swing.JButton btProfissionais;
     public static javax.swing.JButton btRel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JDesktopPane desktop;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     public static javax.swing.JMenu menuCad;
+    private javax.swing.JMenuItem menuGerenciarChamado;
+    private javax.swing.JMenuItem menuNovoChamado;
     public static javax.swing.JMenu menuRel;
     private javax.swing.JLabel txtData;
     public static javax.swing.JLabel txtUser;
