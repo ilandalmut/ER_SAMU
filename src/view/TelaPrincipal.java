@@ -43,7 +43,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuNovoChamado = new javax.swing.JMenuItem();
         menuGerenciarChamado = new javax.swing.JMenuItem();
         menuCad = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        menuCadProfissional = new javax.swing.JMenuItem();
+        menuCadUsuario = new javax.swing.JMenuItem();
         menuRel = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
 
@@ -124,13 +125,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuCad.setText("Cadastros");
         menuCad.setEnabled(false);
 
-        jMenuItem3.setText("Cadastrar Profissional");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        menuCadProfissional.setText("Cadastrar Profissional");
+        menuCadProfissional.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                menuCadProfissionalActionPerformed(evt);
             }
         });
-        menuCad.add(jMenuItem3);
+        menuCad.add(menuCadProfissional);
+
+        menuCadUsuario.setText("Cadastrar Usuário");
+        menuCadUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuCadUsuarioActionPerformed(evt);
+            }
+        });
+        menuCad.add(menuCadUsuario);
 
         jMenuBar1.add(menuCad);
 
@@ -226,11 +235,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         txtData.setText(formatador.format(data));
     }//GEN-LAST:event_formWindowActivated
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void menuCadProfissionalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadProfissionalActionPerformed
         TelaCadastro profissional = new TelaCadastro();
         profissional.setVisible(true);
         desktop.add(profissional);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_menuCadProfissionalActionPerformed
 
     private void menuGerenciarChamadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGerenciarChamadoActionPerformed
         TelaGerenciarChamados gerenciarChamado = new TelaGerenciarChamados();
@@ -249,6 +258,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         relatorio.setVisible(true);
         desktop.add(relatorio);
     }//GEN-LAST:event_menuRelMouseClicked
+
+    private void menuCadUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadUsuarioActionPerformed
+        TelaUsuario usuario = new TelaUsuario();
+        usuario.setVisible(true);
+        desktop.add(usuario);
+    }//GEN-LAST:event_menuCadUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -295,8 +310,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem3;
     public static javax.swing.JMenu menuCad;
+    private javax.swing.JMenuItem menuCadProfissional;
+    private javax.swing.JMenuItem menuCadUsuario;
     private javax.swing.JMenuItem menuGerenciarChamado;
     private javax.swing.JMenuItem menuNovoChamado;
     public static javax.swing.JMenu menuRel;
