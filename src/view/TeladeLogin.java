@@ -48,7 +48,7 @@ public class TeladeLogin extends javax.swing.JFrame {
                 
                 if(rs.next()){
                     String perfil_usuario = rs.getString(5);
-                    if(perfil_usuario.equals ("admin")){
+                    if(perfil_usuario.equals ("Admin")){
                         TelaPrincipal principal = new TelaPrincipal();
                         principal.setVisible(true);
                         TelaPrincipal.menuCad.setEnabled(true);
@@ -58,7 +58,7 @@ public class TeladeLogin extends javax.swing.JFrame {
                         
                         this.dispose();
                     }
-                    if(perfil_usuario.equals ("user")){
+                    if(perfil_usuario.equals ("User")){
                         TelaPrincipal principal = new TelaPrincipal();
                         principal.setVisible(true);
                         TelaPrincipal.txtUser.setText(rs.getString(2));

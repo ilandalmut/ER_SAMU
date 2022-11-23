@@ -23,6 +23,47 @@ public class TelaCadastro extends javax.swing.JInternalFrame {
         conexao = ModuloConexao.connector();
     }
     
+    private void setar_campos(){
+        int setar = tblProf.getSelectedRow();
+        txtId.setText(tblProf.getModel().getValueAt(setar, 0).toString());
+        txtNome.setText(tblProf.getModel().getValueAt(setar, 1).toString());
+        txtEmail.setText(tblProf.getModel().getValueAt(setar, 2).toString());
+        txtTelefone.setText(tblProf.getModel().getValueAt(setar, 3).toString());
+        txtRua.setText(tblProf.getModel().getValueAt(setar, 4).toString());
+        txtNumero.setText(tblProf.getModel().getValueAt(setar, 5).toString());
+        txtBairro.setText(tblProf.getModel().getValueAt(setar, 6).toString());
+        txtCidade.setText(tblProf.getModel().getValueAt(setar, 7).toString());
+        txtCep.setText(tblProf.getModel().getValueAt(setar, 3).toString());
+        txtCargo.setSelectedItem(tblProf.getModel().getValueAt(setar, 4).toString());
+        btSalvar.setEnabled(false);
+    }
+    
+    private void excluir(){
+        String sql = "delete from tb_profissionais where id_prof = ?";
+        int confirma = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja remover esse profissional?", "Atenção!", JOptionPane.YES_NO_OPTION);
+        if(confirma == JOptionPane.YES_OPTION){
+            try{
+                pst = conexao.prepareStatement(sql);
+                pst.setString(1, txtId.getText());
+                int excluido = pst.executeUpdate();
+                if(excluido > 0){
+                    JOptionPane.showMessageDialog(null, "Profissional excluido!");
+                    txtNome.setText(null);
+                    txtEmail.setText(null);
+                    txtTelefone.setText(null);
+                    txtRua.setText(null);
+                    txtNumero.setText(null);
+                    txtBairro.setText(null);
+                    txtCidade.setText(null);
+                    txtCep.setText(null);
+                    txtCargo.setSelectedItem(null);
+                }
+            }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+            }
+        }
+    }
+    
     private void pesquisar(){
         String sql = "select id_prof as ID, nome_prof as Nome, cargo_prof as Cargo from tb_profissionais where nome_prof like ?";
         try {
@@ -103,6 +144,7 @@ public class TelaCadastro extends javax.swing.JInternalFrame {
         btBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProf = new javax.swing.JTable();
+        txtId = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -111,6 +153,24 @@ public class TelaCadastro extends javax.swing.JInternalFrame {
         setMaximumSize(new java.awt.Dimension(837, 586));
         setMinimumSize(new java.awt.Dimension(837, 586));
         setPreferredSize(new java.awt.Dimension(837, 586));
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameActivated(evt);
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
 
         txtRua.setPreferredSize(new java.awt.Dimension(300, 22));
         txtRua.addActionListener(new java.awt.event.ActionListener() {
@@ -297,7 +357,14 @@ public class TelaCadastro extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblProf.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblProfMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblProf);
+
+        txtId.setEditable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -330,43 +397,45 @@ public class TelaCadastro extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(14, 14, 14)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel1)
-                                            .addComponent(jLabel2))))
-                                .addGap(20, 20, 20)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(1, 1, 1)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(39, 39, 39)
-                                .addComponent(jLabel5)
-                                .addGap(29, 29, 29)
-                                .addComponent(txtRua, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(48, 48, 48)
-                                .addComponent(jLabel6)
-                                .addGap(29, 29, 29)
-                                .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel7)
-                                .addGap(29, 29, 29)
-                                .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addComponent(jLabel8)
-                                .addGap(29, 29, 29)
-                                .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(10, 10, 10)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel4)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(14, 14, 14)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel1)
+                                                .addComponent(jLabel2))))
+                                    .addGap(20, 20, 20)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(1, 1, 1)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(39, 39, 39)
+                                    .addComponent(jLabel5)
+                                    .addGap(29, 29, 29)
+                                    .addComponent(txtRua, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(48, 48, 48)
+                                    .addComponent(jLabel6)
+                                    .addGap(29, 29, 29)
+                                    .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jLabel7)
+                                    .addGap(29, 29, 29)
+                                    .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(21, 21, 21)
+                                    .addComponent(jLabel8)
+                                    .addGap(29, 29, 29)
+                                    .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -393,7 +462,9 @@ public class TelaCadastro extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -482,12 +553,24 @@ public class TelaCadastro extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btEditarActionPerformed
 
     private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
-        // TODO add your handling code here:
+        excluir();
     }//GEN-LAST:event_btExcluirActionPerformed
 
     private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarActionPerformed
         pesquisar();
     }//GEN-LAST:event_btBuscarActionPerformed
+
+    private void tblProfMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProfMouseClicked
+        setar_campos();
+    }//GEN-LAST:event_tblProfMouseClicked
+
+    private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
+        
+    }//GEN-LAST:event_formInternalFrameActivated
+
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        txtId.setVisible(false);
+    }//GEN-LAST:event_formInternalFrameOpened
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -515,6 +598,7 @@ public class TelaCadastro extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtCep;
     private javax.swing.JTextField txtCidade;
     private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtNumero;
     private javax.swing.JTextField txtRua;
