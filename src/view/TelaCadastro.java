@@ -28,14 +28,69 @@ public class TelaCadastro extends javax.swing.JInternalFrame {
         txtId.setText(tblProf.getModel().getValueAt(setar, 0).toString());
         txtNome.setText(tblProf.getModel().getValueAt(setar, 1).toString());
         txtEmail.setText(tblProf.getModel().getValueAt(setar, 2).toString());
-        txtTelefone.setText(tblProf.getModel().getValueAt(setar, 3).toString());
-        txtRua.setText(tblProf.getModel().getValueAt(setar, 4).toString());
-        txtNumero.setText(tblProf.getModel().getValueAt(setar, 5).toString());
-        txtBairro.setText(tblProf.getModel().getValueAt(setar, 6).toString());
-        txtCidade.setText(tblProf.getModel().getValueAt(setar, 7).toString());
-        txtCep.setText(tblProf.getModel().getValueAt(setar, 3).toString());
-        txtCargo.setSelectedItem(tblProf.getModel().getValueAt(setar, 4).toString());
+        //txtSenha.setText(tblUser.getModel().getValueAt(setar, 3).toString());
         btSalvar.setEnabled(false);
+        setar_outros();
+    }
+    
+    private void setar_outros(){
+        String sql = "select * from tb_profissionais where id_prof = ?";
+        try{
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, txtId.getText());
+            rs = pst.executeQuery();
+            
+            if(rs.next()){
+                txtTelefone.setText(rs.getString(3));
+                txtEmail.setText(rs.getString(4));
+                txtRua.setText(rs.getString(5));
+                txtNumero.setText(rs.getString(6));
+                txtBairro.setText(rs.getString(7));
+                txtCidade.setText(rs.getString(8));
+                txtCep.setText(rs.getString(9));
+                txtCargo.setSelectedItem(rs.getString(4));
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    
+    private void editar(){
+        String sql = "update tb_profissionais set nome_prof = ? where id_prof = ?";
+        try{
+            pst = conexao.prepareStatement(sql);
+            pst.setString(2, txtNome.getText());
+            
+            
+            if(txtNome.getText().isEmpty()){
+                JOptionPane.showMessageDialog(null, "O campo nome é obrigatório!");
+            } else {
+                int adicionado = pst.executeUpdate();
+                if(adicionado > 0){
+                    JOptionPane.showMessageDialog(null, "Profissional cadastrado!");
+                    txtNome.setText(null);
+                    
+                }
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);    
+    }
+    }
+    
+    private void novo(){
+        txtId.setText(null);
+        txtNome.setText(null);
+        txtEmail.setText(null);
+        txtTelefone.setText(null);
+        txtRua.setText(null);
+        txtNumero.setText(null);
+        txtBairro.setText(null);
+        txtCidade.setText(null);
+        txtCep.setText(null);
+        ((DefaultTableModel)tblProf.getModel()).setRowCount(0);
+        btSalvar.setEnabled(true);
+        btEditar.setEnabled(false);
+        btExcluir.setEnabled(false);
     }
     
     private void excluir(){
@@ -327,6 +382,11 @@ public class TelaCadastro extends javax.swing.JInternalFrame {
             }
         });
 
+        tblProf = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         tblProf.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -545,11 +605,11 @@ public class TelaCadastro extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btSalvarActionPerformed
 
     private void btNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovoActionPerformed
-        // TODO add your handling code here:
+        novo();
     }//GEN-LAST:event_btNovoActionPerformed
 
     private void btEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarActionPerformed
-        // TODO add your handling code here:
+        editar();
     }//GEN-LAST:event_btEditarActionPerformed
 
     private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
@@ -561,7 +621,9 @@ public class TelaCadastro extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btBuscarActionPerformed
 
     private void tblProfMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProfMouseClicked
+
         setar_campos();
+        
     }//GEN-LAST:event_tblProfMouseClicked
 
     private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated

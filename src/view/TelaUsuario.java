@@ -28,9 +28,47 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         txtId.setText(tblUser.getModel().getValueAt(setar, 0).toString());
         txtNome.setText(tblUser.getModel().getValueAt(setar, 1).toString());
         txtEmail.setText(tblUser.getModel().getValueAt(setar, 2).toString());
-        txtSenha.setText(tblUser.getModel().getValueAt(setar, 3).toString());
+        //txtSenha.setText(tblUser.getModel().getValueAt(setar, 3).toString());
         txtPerfil.setSelectedItem(tblUser.getModel().getValueAt(setar, 4).toString());
         btSalvar.setEnabled(false);
+        setar_outros();
+    }
+    
+    private void editar(){
+        String sql = "update tb_usuarios set nome_usuario =? where id_usuario =?";
+        try{
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, txtNome.getText());
+            
+            
+            if(txtNome.getText().isEmpty()){
+                JOptionPane.showMessageDialog(null, "O campo nome é obrigatório!");
+            } else {
+                int adicionado = pst.executeUpdate();
+                if(adicionado > 0){
+                    JOptionPane.showMessageDialog(null, "Profissional cadastrado!");
+                    txtNome.setText(null);
+                    
+                }
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);    
+    }
+    }
+    
+    private void setar_outros(){
+        String sql = "select * from tb_usuarios where id_usuario = ?";
+        try{
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, txtId.getText());
+            rs = pst.executeQuery();
+            
+            if(rs.next()){
+                txtSenha.setText(rs.getString(4));
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
     }
     
     private void excluir(){
@@ -632,7 +670,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btNovoActionPerformed
 
     private void btEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarActionPerformed
-        // TODO add your handling code here:
+        editar();
     }//GEN-LAST:event_btEditarActionPerformed
 
     private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed

@@ -44,7 +44,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
           <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="696" pref="696" max="-2" attributes="0"/>
                       <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
@@ -78,29 +78,28 @@
                       <Component id="btBuscar" min="-2" pref="142" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="780" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="264" pref="264" max="-2" attributes="0"/>
-                          <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="29" pref="29" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="69" pref="69" max="-2" attributes="0"/>
-                                  <Component id="jInternalFrame1" min="-2" pref="0" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="txtPerfil" min="-2" pref="196" max="-2" attributes="0"/>
+                      <EmptySpace min="264" pref="264" max="-2" attributes="0"/>
+                      <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="29" pref="29" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="69" pref="69" max="-2" attributes="0"/>
+                              <Component id="jInternalFrame1" min="-2" pref="0" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="txtId" min="-2" pref="50" max="-2" attributes="0"/>
+                          <Component id="txtPerfil" min="-2" pref="196" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="255" pref="255" max="-2" attributes="0"/>
-                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="29" pref="29" max="-2" attributes="0"/>
-                          <Component id="txtSenha" min="-2" pref="451" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="txtId" min="-2" pref="50" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jScrollPane1" alignment="1" min="-2" pref="780" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="29" pref="29" max="-2" attributes="0"/>
+                              <Component id="txtSenha" min="-2" pref="451" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
               </Group>
