@@ -32,6 +32,20 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         txtPerfil.setSelectedItem(tblUser.getModel().getValueAt(setar, 4).toString());
         btSalvar.setEnabled(false);
         setar_outros();
+        btEditar.setEnabled(true);
+        btExcluir.setEnabled(true);
+        btNovo.setEnabled(true);
+    }
+    
+    private void novo(){
+        txtId.setText(null);
+        txtNome.setText(null);
+        txtEmail.setText(null);
+        txtSenha.setText(null);
+        ((DefaultTableModel)tblUser.getModel()).setRowCount(0);
+        btSalvar.setEnabled(true);
+        btEditar.setEnabled(false);
+        btExcluir.setEnabled(false);
     }
     
     private void editar(){
@@ -39,6 +53,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         try{
             pst = conexao.prepareStatement(sql);
             pst.setString(1, txtNome.getText());
+            pst.setString(2, txtId.getText());
             
             
             if(txtNome.getText().isEmpty()){
@@ -243,16 +258,16 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(35, 35, 35)
                 .addComponent(jLabel3)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(20, 20, 20)
                 .addComponent(jLabel3)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         txtSenha.setPreferredSize(new java.awt.Dimension(300, 22));
@@ -545,7 +560,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(696, 696, 696)
                         .addComponent(jLabel11))
@@ -574,25 +589,24 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(264, 264, 264)
+                        .addComponent(jLabel8)
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(69, 69, 69)
+                                .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 780, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(264, 264, 264)
-                            .addComponent(jLabel8)
-                            .addGap(29, 29, 29)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(69, 69, 69)
-                                    .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(txtPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(255, 255, 255)
-                            .addComponent(jLabel5)
-                            .addGap(29, 29, 29)
-                            .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 780, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(29, 29, 29)
+                                .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(0, 19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -663,18 +677,23 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
         adicionar();
+        pesquisar();
     }//GEN-LAST:event_btSalvarActionPerformed
 
     private void btNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovoActionPerformed
-        // TODO add your handling code here:
+        novo();
+        btEditar.setEnabled(false);
+        btExcluir.setEnabled(false);
     }//GEN-LAST:event_btNovoActionPerformed
 
     private void btEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarActionPerformed
         editar();
+        pesquisar();
     }//GEN-LAST:event_btEditarActionPerformed
 
     private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
         excluir();
+        pesquisar();
     }//GEN-LAST:event_btExcluirActionPerformed
 
     private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarActionPerformed
@@ -723,6 +742,10 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         txtId.setVisible(false);
+        btNovo.setEnabled(false);
+        btEditar.setEnabled(false);
+        btExcluir.setEnabled(false);
+        pesquisar();
     }//GEN-LAST:event_formInternalFrameOpened
 
 

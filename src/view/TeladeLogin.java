@@ -5,6 +5,7 @@
  */
 package view;
 
+import java.awt.event.KeyEvent;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import model.ModuloConexao;
@@ -100,6 +101,7 @@ public class TeladeLogin extends javax.swing.JFrame {
         lblStatus.setText("Status");
 
         btlogar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/btEntrar.png"))); // NOI18N
+        btlogar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btlogar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btlogarMouseClicked(evt);
@@ -113,6 +115,16 @@ public class TeladeLogin extends javax.swing.JFrame {
 
         txtSenha.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtSenha.setMargin(new java.awt.Insets(2, 10, 2, 2));
+        txtSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSenhaActionPerformed(evt);
+            }
+        });
+        txtSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSenhaKeyPressed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
@@ -182,6 +194,16 @@ public class TeladeLogin extends javax.swing.JFrame {
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         status();
     }//GEN-LAST:event_formWindowActivated
+
+    private void txtSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSenhaActionPerformed
+        
+    }//GEN-LAST:event_txtSenhaActionPerformed
+
+    private void txtSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSenhaKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            logar();
+        }
+    }//GEN-LAST:event_txtSenhaKeyPressed
 
     /**
      * @param args the command line arguments

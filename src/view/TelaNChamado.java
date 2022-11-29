@@ -9,12 +9,12 @@ package view;
  *
  * @author Ivanete
  */
-public class TelaNovoChamado extends javax.swing.JInternalFrame {
+public class TelaNChamado extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form TelaNovoChamado
+     * Creates new form TelaNChamado
      */
-    public TelaNovoChamado() {
+    public TelaNChamado() {
         initComponents();
     }
 
@@ -272,7 +272,7 @@ public class TelaNovoChamado extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel11)
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 28, Short.MAX_VALUE))
+                .addGap(0, 30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -321,7 +321,7 @@ public class TelaNovoChamado extends javax.swing.JInternalFrame {
                 .addGap(38, 38, 38))
         );
 
-        setBounds(0, 0, 835, 584);
+        setBounds(0, 0, 837, 586);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
@@ -336,13 +336,13 @@ public class TelaNovoChamado extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
-
     private void jComboBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox5ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:

@@ -60,6 +60,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btNovoChamado.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btNovoChamado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-ambulance-24.png"))); // NOI18N
         btNovoChamado.setText("  Novo Chamado");
+        btNovoChamado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btNovoChamadoActionPerformed(evt);
+            }
+        });
 
         btProfissionais.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btProfissionais.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-grupo-de-usuários-30.png"))); // NOI18N
@@ -104,6 +109,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenu1.setText("Chamados");
 
+        menuNovoChamado.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_SPACE, java.awt.event.InputEvent.CTRL_MASK));
+        menuNovoChamado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-ambulance-2.png"))); // NOI18N
         menuNovoChamado.setText("Novo Chamado");
         menuNovoChamado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,6 +119,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(menuNovoChamado);
 
+        menuGerenciarChamado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-writing-down-27.png"))); // NOI18N
         menuGerenciarChamado.setText("Gerenciar Chamados");
         menuGerenciarChamado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,6 +133,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuCad.setText("Cadastros");
         menuCad.setEnabled(false);
 
+        menuCadProfissional.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-médica-27.png"))); // NOI18N
         menuCadProfissional.setText("Cadastrar Profissional");
         menuCadProfissional.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -133,6 +142,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         menuCad.add(menuCadProfissional);
 
+        menuCadUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-usuário-27.png"))); // NOI18N
         menuCadUsuario.setText("Cadastrar Usuário");
         menuCadUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -224,9 +234,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btRelActionPerformed
 
     private void menuNovoChamadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNovoChamadoActionPerformed
-        TelaNovoChamado novoChamado = new TelaNovoChamado();
-        novoChamado.setVisible(true);
-        desktop.add(novoChamado);
+        TelaNChamado chamado = new TelaNChamado();
+        chamado.setVisible(true);
+        desktop.add(chamado);
     }//GEN-LAST:event_menuNovoChamadoActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -264,6 +274,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         usuario.setVisible(true);
         desktop.add(usuario);
     }//GEN-LAST:event_menuCadUsuarioActionPerformed
+
+    private void btNovoChamadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovoChamadoActionPerformed
+        TelaNChamado chamado = new TelaNChamado();
+        chamado.setVisible(true);
+        desktop.add(chamado);
+    }//GEN-LAST:event_btNovoChamadoActionPerformed
 
     /**
      * @param args the command line arguments

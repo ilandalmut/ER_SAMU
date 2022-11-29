@@ -31,6 +31,9 @@ public class TelaCadastro extends javax.swing.JInternalFrame {
         //txtSenha.setText(tblUser.getModel().getValueAt(setar, 3).toString());
         btSalvar.setEnabled(false);
         setar_outros();
+        btEditar.setEnabled(true);
+        btExcluir.setEnabled(true);
+        btNovo.setEnabled(true);
     }
     
     private void setar_outros(){
@@ -59,7 +62,8 @@ public class TelaCadastro extends javax.swing.JInternalFrame {
         String sql = "update tb_profissionais set nome_prof = ? where id_prof = ?";
         try{
             pst = conexao.prepareStatement(sql);
-            pst.setString(2, txtNome.getText());
+            pst.setString(1, txtNome.getText());
+            pst.setString(2, txtId.getText());
             
             
             if(txtNome.getText().isEmpty()){
@@ -68,7 +72,7 @@ public class TelaCadastro extends javax.swing.JInternalFrame {
                 int adicionado = pst.executeUpdate();
                 if(adicionado > 0){
                     JOptionPane.showMessageDialog(null, "Profissional cadastrado!");
-                    txtNome.setText(null);
+                    novo();
                     
                 }
             }
@@ -317,16 +321,16 @@ public class TelaCadastro extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(24, 24, 24)
                 .addComponent(jLabel3)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(22, 22, 22)
                 .addComponent(jLabel3)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -602,18 +606,23 @@ public class TelaCadastro extends javax.swing.JInternalFrame {
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
         adicionar();
+        pesquisar();
     }//GEN-LAST:event_btSalvarActionPerformed
 
     private void btNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btNovoActionPerformed
         novo();
+        btEditar.setEnabled(false);
+        btExcluir.setEnabled(false);
     }//GEN-LAST:event_btNovoActionPerformed
 
     private void btEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarActionPerformed
         editar();
+        pesquisar();
     }//GEN-LAST:event_btEditarActionPerformed
 
     private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
         excluir();
+        pesquisar();
     }//GEN-LAST:event_btExcluirActionPerformed
 
     private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarActionPerformed
@@ -632,6 +641,10 @@ public class TelaCadastro extends javax.swing.JInternalFrame {
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         txtId.setVisible(false);
+        btNovo.setEnabled(false);
+        btEditar.setEnabled(false);
+        btExcluir.setEnabled(false);
+        pesquisar();
     }//GEN-LAST:event_formInternalFrameOpened
 
 
