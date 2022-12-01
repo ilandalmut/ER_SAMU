@@ -5,6 +5,7 @@
  */
 package view;
 
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.sql.*;
 import javax.swing.JOptionPane;
@@ -28,9 +29,10 @@ public class TeladeLogin extends javax.swing.JFrame {
     private void status(){
         try{
             if(conexao != null){
-                lblStatus.setText("conectado");
+                lblStatus.setText("");
             } else {
-                lblStatus.setText("desconectado");
+                lblStatus.setForeground(Color.RED);
+                lblStatus.setText("Banco de Dados desconectado");
             }
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -88,6 +90,7 @@ public class TeladeLogin extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        txtExibirSenha = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ER SAMU-Login");
@@ -110,11 +113,27 @@ public class TeladeLogin extends javax.swing.JFrame {
 
         txtLogin.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtLogin.setMargin(new java.awt.Insets(2, 10, 2, 2));
+        txtLogin.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtLoginFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtLoginFocusLost(evt);
+            }
+        });
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/samu-192-logo.png"))); // NOI18N
 
         txtSenha.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtSenha.setMargin(new java.awt.Insets(2, 10, 2, 2));
+        txtSenha.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtSenhaFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtSenhaFocusLost(evt);
+            }
+        });
         txtSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtSenhaActionPerformed(evt);
@@ -138,6 +157,14 @@ public class TeladeLogin extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(51, 51, 51));
         jLabel5.setText("Senha");
 
+        txtExibirSenha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtExibirSenha.setText("Mostrar senha");
+        txtExibirSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtExibirSenhaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -155,7 +182,8 @@ public class TeladeLogin extends javax.swing.JFrame {
                         .addComponent(btlogar, javax.swing.GroupLayout.Alignment.TRAILING))
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel5)
+                    .addComponent(txtExibirSenha))
                 .addGap(43, 43, 43))
         );
         layout.setVerticalGroup(
@@ -165,14 +193,16 @@ public class TeladeLogin extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addComponent(jLabel3)
-                        .addGap(39, 39, 39)
+                        .addGap(26, 26, 26)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtExibirSenha))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addComponent(jLabel2)))
@@ -193,6 +223,12 @@ public class TeladeLogin extends javax.swing.JFrame {
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         status();
+        if(txtSenha.getText().equals("")){
+            txtSenha.setEchoChar((char) 0);
+	    txtSenha.setForeground(Color.lightGray);	
+            txtSenha.setText("Digite sua senha");
+                
+	}
     }//GEN-LAST:event_formWindowActivated
 
     private void txtSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSenhaActionPerformed
@@ -204,6 +240,46 @@ public class TeladeLogin extends javax.swing.JFrame {
             logar();
         }
     }//GEN-LAST:event_txtSenhaKeyPressed
+
+    private void txtExibirSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtExibirSenhaActionPerformed
+        if (txtExibirSenha.isSelected()) {
+            txtSenha.setEchoChar((char) 0);
+        } else {
+        txtSenha.setEchoChar('●');
+        }
+    }//GEN-LAST:event_txtExibirSenhaActionPerformed
+
+    private void txtLoginFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtLoginFocusGained
+        if(txtLogin.getText().equals("Digite seu usuário")){
+		txtLogin.setText("");
+                txtLogin.setForeground(Color.BLACK);
+	}
+    }//GEN-LAST:event_txtLoginFocusGained
+
+    private void txtLoginFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtLoginFocusLost
+        if(txtLogin.getText().equals("")){
+	    txtLogin.setForeground(Color.lightGray);	
+            txtLogin.setText("Digite seu usuário");
+                
+	}
+    }//GEN-LAST:event_txtLoginFocusLost
+
+    private void txtSenhaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSenhaFocusGained
+        if(txtSenha.getText().equals("Digite sua senha")){
+                txtSenha.setEchoChar('●');
+		txtSenha.setText("");
+                txtSenha.setForeground(Color.BLACK);
+	}
+    }//GEN-LAST:event_txtSenhaFocusGained
+
+    private void txtSenhaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSenhaFocusLost
+        if(txtSenha.getText().equals("")){
+            txtSenha.setEchoChar((char) 0);
+	    txtSenha.setForeground(Color.lightGray);	
+            txtSenha.setText("Digite sua senha");
+                
+	}
+    }//GEN-LAST:event_txtSenhaFocusLost
 
     /**
      * @param args the command line arguments
@@ -247,6 +323,7 @@ public class TeladeLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel lblStatus;
+    private javax.swing.JCheckBox txtExibirSenha;
     private javax.swing.JTextField txtLogin;
     private javax.swing.JPasswordField txtSenha;
     // End of variables declaration//GEN-END:variables

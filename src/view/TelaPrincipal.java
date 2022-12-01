@@ -241,7 +241,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         Date data = new Date();
-        DateFormat formatador = DateFormat.getDateInstance(DateFormat.DATE_FIELD);
+        DateFormat formatador = DateFormat.getDateInstance(DateFormat.LONG);
         txtData.setText(formatador.format(data));
     }//GEN-LAST:event_formWindowActivated
 
