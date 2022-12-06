@@ -46,7 +46,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuCadProfissional = new javax.swing.JMenuItem();
         menuCadUsuario = new javax.swing.JMenuItem();
         menuRel = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
+        menuSair = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Painel de Controle - ER SAMU");
@@ -119,6 +119,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jMenu1.add(menuNovoChamado);
 
+        menuGerenciarChamado.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_MASK));
         menuGerenciarChamado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-writing-down-27.png"))); // NOI18N
         menuGerenciarChamado.setText("Gerenciar Chamados");
         menuGerenciarChamado.addActionListener(new java.awt.event.ActionListener() {
@@ -133,6 +134,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuCad.setText("Cadastros");
         menuCad.setEnabled(false);
 
+        menuCadProfissional.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.ALT_MASK));
         menuCadProfissional.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-médica-27.png"))); // NOI18N
         menuCadProfissional.setText("Cadastrar Profissional");
         menuCadProfissional.addActionListener(new java.awt.event.ActionListener() {
@@ -142,6 +144,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         menuCad.add(menuCadProfissional);
 
+        menuCadUsuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.ALT_MASK));
         menuCadUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-usuário-27.png"))); // NOI18N
         menuCadUsuario.setText("Cadastrar Usuário");
         menuCadUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -167,8 +170,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jMenuBar1.add(menuRel);
 
-        jMenu4.setText("Sair");
-        jMenuBar1.add(jMenu4);
+        menuSair.setText("Sair");
+        menuSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSairActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(menuSair);
 
         setJMenuBar(jMenuBar1);
 
@@ -281,6 +289,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         desktop.add(chamado);
     }//GEN-LAST:event_btNovoChamadoActionPerformed
 
+    private void menuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSairActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_menuSairActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -324,7 +336,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     public static javax.swing.JMenu menuCad;
     private javax.swing.JMenuItem menuCadProfissional;
@@ -332,6 +343,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuGerenciarChamado;
     private javax.swing.JMenuItem menuNovoChamado;
     public static javax.swing.JMenu menuRel;
+    private javax.swing.JMenu menuSair;
     private javax.swing.JLabel txtData;
     public static javax.swing.JLabel txtUser;
     // End of variables declaration//GEN-END:variables

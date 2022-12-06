@@ -32,7 +32,7 @@ public class TelaNChamado extends javax.swing.JInternalFrame {
     }
     
     private void adicionar(){
-        String sql = "insert into tb_profissionais(nome_prof,email_prof,telefone_prof,rua_prof,numero_casa_prof,bairro_prof,cidade_prof,cep_prof,cargo_prof) values(?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into tb_chamados(data_abertura,data_saida,nome_paciente,qth,ndo,tarm,mr,cond,enf,dr) values(?,?,?,?,?,?,?,?,?,?)";
         try{
             pst = conexao.prepareStatement(sql);
             pst.setString(1, txtAbertura.getText());
@@ -46,12 +46,12 @@ public class TelaNChamado extends javax.swing.JInternalFrame {
             pst.setString(9, cbEnf.getSelectedItem().toString());
             pst.setString(10, cbDR.getSelectedItem().toString());
             
-            if(txtQTH.getText().isEmpty() || txtNDO.getText().isEmpty()){
-                JOptionPane.showMessageDialog(null, "Os campos QTH e Natureza da ocorrência, são obrigatórios!");
+            if(txtQTH.getText().isEmpty() || txtSaida.getText().isEmpty()){
+                JOptionPane.showMessageDialog(null, "Os campos QTH e Registro de Saida, são obrigatórios!");
             } else {
                 int adicionado = pst.executeUpdate();
                 if(adicionado > 0){
-                    JOptionPane.showMessageDialog(null, "ocorrência cadastrado!");
+                    JOptionPane.showMessageDialog(null, "Registrado com sucesso!");
                     txtAbertura.setText(null);
                     txtSaida.setText(null);
                     txtPaciente.setText(null);
@@ -521,7 +521,7 @@ public class TelaNChamado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
