@@ -59,11 +59,20 @@ public class TelaCadastro extends javax.swing.JInternalFrame {
     }
     
     private void editar(){
-        String sql = "update tb_profissionais set nome_prof = ? where id_prof = ?";
+        String sql = "update tb_profissionais set nome_prof = ?, email_prof = ?, telefone_prof = ?, rua_prof = ?, numero_casa_prof = ?, bairro_prof = ?, cidade_prof = ?, cep_prof = ?, cargo_prof = ? where id_prof = ?";
         try{
             pst = conexao.prepareStatement(sql);
             pst.setString(1, txtNome.getText());
-            pst.setString(2, txtId.getText());
+            pst.setString(2, txtEmail.getText());
+            pst.setString(3, txtTelefone.getText());
+            pst.setString(4, txtRua.getText());
+            pst.setString(5, txtNumero.getText());
+            pst.setString(6, txtBairro.getText());
+            pst.setString(7, txtCidade.getText());
+            pst.setString(8, txtCep.getText());
+            pst.setString(9, txtCargo.getSelectedItem().toString());
+            pst.setString(10, txtId.getText());
+            
             
             
             if(txtNome.getText().isEmpty()){

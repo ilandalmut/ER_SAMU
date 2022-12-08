@@ -49,12 +49,14 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
     }
     
     private void editar(){
-        String sql = "update tb_usuarios set nome_usuario =? where id_usuario =?";
+        String sql = "update tb_usuarios set nome_usuario =?, login_usuario = ?, senha_usuario = ?, perfil_usuario = ? where id_usuario =?";
         try{
             pst = conexao.prepareStatement(sql);
             pst.setString(1, txtNome.getText());
-            pst.setString(2, txtId.getText());
-            
+            pst.setString(2, txtEmail.getText());
+            pst.setString(3, txtSenha.getText());
+            pst.setString(4, txtPerfil.getSelectedItem().toString());
+            pst.setString(5, txtId.getText());
             
             if(txtNome.getText().isEmpty()){
                 JOptionPane.showMessageDialog(null, "O campo nome é obrigatório!");

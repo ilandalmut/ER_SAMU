@@ -6,11 +6,17 @@
 package view;
 
 import java.sql.*;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 import model.ModuloConexao;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 public class TelaGerenciarChamados extends javax.swing.JInternalFrame {
 
@@ -64,6 +70,46 @@ public class TelaGerenciarChamados extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, e);
         }
         setar_outros();
+    }
+    
+    private void imprimir() {
+    
+     try {
+         
+     HashMap filtro = new HashMap();
+     filtro.put("id_chamado", Integer.parseInt(txtID.getText()));
+     JasperReport report = JasperCompileManager.compileReport("C:\\relatorios\\chamado2.jrxml");
+     JasperPrint print = JasperFillManager.fillReport(report, filtro, conexao);
+     JasperViewer viewer = new JasperViewer(print, false);
+     viewer.setVisible(true);
+     viewer.setTitle("Chamado");
+     
+     } catch (Exception e) {
+     JOptionPane.showMessageDialog(null, e);
+     }
+     }
+    
+    private void salvar(){
+        String sql = "update tb_chamados set situacao =?, observacao =? where id_chamado =?";
+        try{
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, txtSituacao.getText());
+            pst.setString(2, txtObservacao.getText());
+            pst.setString(3, txtID.getText());
+            
+            
+            if(txtSituacao.getText().isEmpty()){
+                JOptionPane.showMessageDialog(null, "O campo Situação é obrigatório!");
+            } else {
+                int adicionado = pst.executeUpdate();
+                if(adicionado > 0){
+                    JOptionPane.showMessageDialog(null, "Informações atualizadas!");
+                    
+                }
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);    
+    }
     }
     
     @SuppressWarnings("unchecked")
@@ -293,7 +339,7 @@ public class TelaGerenciarChamados extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        salvar();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
@@ -305,7 +351,7 @@ public class TelaGerenciarChamados extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtSituacaoActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+        imprimir();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void txtPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisarActionPerformed
