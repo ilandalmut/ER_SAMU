@@ -78,11 +78,11 @@ public class TelaGerenciarChamados extends javax.swing.JInternalFrame {
          
      HashMap filtro = new HashMap();
      filtro.put("id_chamado", Integer.parseInt(txtID.getText()));
-     JasperReport report = JasperCompileManager.compileReport("C:\\relatorios\\chamado2.jrxml");
+     JasperReport report = JasperCompileManager.compileReport("C:\\relatorios\\chamado.jrxml");
      JasperPrint print = JasperFillManager.fillReport(report, filtro, conexao);
      JasperViewer viewer = new JasperViewer(print, false);
      viewer.setVisible(true);
-     viewer.setTitle("Chamado");
+     viewer.setTitle("Registro de Ocorrências");
      
      } catch (Exception e) {
      JOptionPane.showMessageDialog(null, e);
