@@ -357,14 +357,7 @@ FROM db_samu.tb_chamados where id_chamado =  $P{id_chamado}]]>
 				<textElement>
 					<font size="10"/>
 				</textElement>
-				<text><![CDATA[DR]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="461" y="37" width="70" height="24" uuid="aa7dfbd9-3887-40b3-bad9-6a4eb5efbc03"/>
-				<textElement textAlignment="Left">
-					<font size="8"/>
-				</textElement>
-				<text><![CDATA[Médico]]></text>
+				<text><![CDATA[MÉDICO]]></text>
 			</staticText>
 			<line>
 				<reportElement x="2" y="120" width="548" height="1" uuid="03320110-0ca7-4490-8986-0981281f567d"/>
@@ -439,7 +432,7 @@ FROM db_samu.tb_chamados where id_chamado =  $P{id_chamado}]]>
 				<reportElement x="5" y="237" width="100" height="30" uuid="8d4c069f-10cf-4eb8-8d25-fe8d4900a1d1"/>
 				<text><![CDATA[Dt./Hr. Impressão: ]]></text>
 			</staticText>
-			<textField pattern="dd MMMMM, yyyy">
+			<textField pattern="dd MMMMM yyyy">
 				<reportElement x="90" y="237" width="100" height="30" uuid="f00c7a3f-952e-430f-9a08-a5715766b607"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>

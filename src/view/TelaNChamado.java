@@ -321,7 +321,7 @@ public class TelaNChamado extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 391, -1, -1));
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel15.setText("DR:*");
+        jLabel15.setText("MÉDICO:*");
         getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(658, 391, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N

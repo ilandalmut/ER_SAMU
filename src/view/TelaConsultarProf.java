@@ -282,7 +282,7 @@ public class TelaConsultarProf extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 375, -1, -1));
 
         txtCargo.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
-        txtCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TARM", "MR", "Condutor", "Enf", "Téc. Enf", "DR" }));
+        txtCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TARM", "MR", "Condutor", "Enf", "Téc. Enf", "Médico" }));
         getContentPane().add(txtCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(313, 420, 141, 34));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N

@@ -315,7 +315,7 @@
             <StringItem index="2" value="Condutor"/>
             <StringItem index="3" value="Enf"/>
             <StringItem index="4" value="T&#xe9;c. Enf"/>
-            <StringItem index="5" value="DR"/>
+            <StringItem index="5" value="M&#xe9;dico"/>
           </StringArray>
         </Property>
       </Properties>

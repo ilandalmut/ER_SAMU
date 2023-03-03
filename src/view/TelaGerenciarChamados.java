@@ -52,7 +52,7 @@ public class TelaGerenciarChamados extends javax.swing.JInternalFrame {
     }
 
     private void pesquisar(){
-        String sql = "select id_chamado as Código, data_abertura as Abertura, data_saida as Saída, nome_paciente as Paciente, qth as QTH, ndo as Natureza, tarm as TARM, mr as MR, cond as COND, enf as ENF_TEC, dr as DR from tb_Chamados where nome_paciente like ? or tarm like ? or mr like ? or cond like ? or enf like ? or qth like ? or dr like ? or situacao like ?";
+        String sql = "select id_chamado as Código, data_abertura as Abertura, data_saida as Saída, nome_paciente as Paciente, qth as QTH, ndo as Natureza, tarm as TARM, mr as MR, cond as COND, enf as ENF_TEC, dr as MÉDICO from tb_Chamados where nome_paciente like ? or tarm like ? or mr like ? or cond like ? or enf like ? or qth like ? or dr like ? or situacao like ?";
         try {
             conexao = ModuloConexao.connector();
             pst = conexao.prepareStatement(sql);

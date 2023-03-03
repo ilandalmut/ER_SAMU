@@ -285,7 +285,7 @@ public class TelaCadastro extends javax.swing.JInternalFrame {
         jLabel8.setText("Cidade:");
 
         txtCargo.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
-        txtCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TARM", "MR", "Condutor", "Enf", "Téc. Enf", "DR" }));
+        txtCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TARM", "MR", "Condutor", "Enf", "Téc. Enf", "Médico" }));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Nome:*");

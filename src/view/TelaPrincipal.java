@@ -48,6 +48,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuCadProfissional = new javax.swing.JMenuItem();
         menuCadUsuario = new javax.swing.JMenuItem();
         menuRel = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         menuSobre = new javax.swing.JMenu();
         menuSair = new javax.swing.JMenu();
 
@@ -171,6 +172,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 menuRelActionPerformed(evt);
             }
         });
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-documento-30.png"))); // NOI18N
+        jMenuItem1.setText("Relatórios");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        menuRel.add(jMenuItem1);
+
         jMenuBar1.add(menuRel);
 
         menuSobre.setText("Sobre");
@@ -287,15 +299,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuGerenciarChamadoActionPerformed
 
     private void menuRelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuRelActionPerformed
-        TelaRelatorio relatorio = new TelaRelatorio();
-        relatorio.setVisible(true);
-        desktop.add(relatorio);
+        
     }//GEN-LAST:event_menuRelActionPerformed
 
     private void menuRelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuRelMouseClicked
-        TelaRelatorio relatorio = new TelaRelatorio();
-        relatorio.setVisible(true);
-        desktop.add(relatorio);
+
     }//GEN-LAST:event_menuRelMouseClicked
 
     private void menuCadUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadUsuarioActionPerformed
@@ -341,6 +349,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         sobre.setVisible(true);
     }//GEN-LAST:event_menuSobreMouseClicked
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        TelaRelatorio relatorio = new TelaRelatorio();
+        relatorio.setVisible(true);
+        desktop.add(relatorio);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -385,6 +399,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     public static javax.swing.JMenu menuCad;
     private javax.swing.JMenuItem menuCadProfissional;
     private javax.swing.JMenuItem menuCadUsuario;
