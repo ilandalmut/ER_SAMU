@@ -193,7 +193,6 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
-        setMaximizable(true);
         setTitle("Usuário");
         setMaximumSize(new java.awt.Dimension(837, 586));
         setMinimumSize(new java.awt.Dimension(837, 586));
@@ -219,6 +218,8 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
+        txtNome.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
+        txtNome.setMargin(new java.awt.Insets(2, 8, 2, 2));
         txtNome.setPreferredSize(new java.awt.Dimension(300, 22));
         txtNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -226,6 +227,8 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
             }
         });
 
+        txtEmail.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
+        txtEmail.setMargin(new java.awt.Insets(2, 8, 2, 2));
         txtEmail.setPreferredSize(new java.awt.Dimension(300, 22));
         txtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -241,6 +244,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel8.setText("Perfil:*");
 
+        txtPerfil.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
         txtPerfil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "User", "Admin" }));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -272,6 +276,8 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
+        txtSenha.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
+        txtSenha.setMargin(new java.awt.Insets(2, 8, 2, 2));
         txtSenha.setPreferredSize(new java.awt.Dimension(300, 22));
         txtSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

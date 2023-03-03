@@ -126,6 +126,10 @@ WHERE data_abertura LIKE '%$P!{data_abertura}%']]>
 				</textElement>
 				<text><![CDATA[RELATÓRIO GERAL]]></text>
 			</staticText>
+			<image>
+				<reportElement x="6" y="0" width="92" height="82" uuid="eaceeda2-ef28-4edf-827a-c226f350fba4"/>
+				<imageExpression><![CDATA["src/images/logo_samu_circulo.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>

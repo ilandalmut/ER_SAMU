@@ -111,7 +111,7 @@ public class TeladeLogin extends javax.swing.JFrame {
             }
         });
 
-        txtLogin.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtLogin.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
         txtLogin.setMargin(new java.awt.Insets(2, 10, 2, 2));
         txtLogin.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -124,7 +124,7 @@ public class TeladeLogin extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/samu-192-logo.png"))); // NOI18N
 
-        txtSenha.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtSenha.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
         txtSenha.setMargin(new java.awt.Insets(2, 10, 2, 2));
         txtSenha.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {

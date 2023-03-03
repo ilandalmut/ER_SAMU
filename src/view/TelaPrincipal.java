@@ -7,6 +7,7 @@ package view;
 
 import java.text.DateFormat;
 import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -47,6 +48,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuCadProfissional = new javax.swing.JMenuItem();
         menuCadUsuario = new javax.swing.JMenuItem();
         menuRel = new javax.swing.JMenu();
+        menuSobre = new javax.swing.JMenu();
         menuSair = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -171,7 +173,25 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jMenuBar1.add(menuRel);
 
+        menuSobre.setText("Sobre");
+        menuSobre.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuSobreMouseClicked(evt);
+            }
+        });
+        menuSobre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSobreActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(menuSobre);
+
         menuSair.setText("Sair");
+        menuSair.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuSairMouseClicked(evt);
+            }
+        });
         menuSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuSairActionPerformed(evt);
@@ -231,7 +251,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btProfissionaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btProfissionaisActionPerformed
-        TelaCadastro profissional = new TelaCadastro();
+        TelaConsultarProf profissional = new TelaConsultarProf();
         profissional.setVisible(true);
         desktop.add(profissional);
     }//GEN-LAST:event_btProfissionaisActionPerformed
@@ -291,8 +311,35 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btNovoChamadoActionPerformed
 
     private void menuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSairActionPerformed
-        System.exit(0);
+        int sair = JOptionPane.showConfirmDialog(null, "Deseja realmente sair?", "Atenção", JOptionPane.YES_NO_OPTION);
+       
+        if(sair == JOptionPane.YES_OPTION){
+            this.dispose();
+         TeladeLogin login = new TeladeLogin();
+         login.setVisible(true);
+         
+        }
     }//GEN-LAST:event_menuSairActionPerformed
+
+    private void menuSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuSairMouseClicked
+        int sair = JOptionPane.showConfirmDialog(null, "Deseja realmente sair?", "Atenção", JOptionPane.YES_NO_OPTION);
+       
+        if(sair == JOptionPane.YES_OPTION){
+            this.dispose();
+         TeladeLogin login = new TeladeLogin();
+         login.setVisible(true);
+         
+        }
+    }//GEN-LAST:event_menuSairMouseClicked
+
+    private void menuSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSobreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuSobreActionPerformed
+
+    private void menuSobreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuSobreMouseClicked
+        TelaSobre sobre = new TelaSobre();
+        sobre.setVisible(true);
+    }//GEN-LAST:event_menuSobreMouseClicked
 
     /**
      * @param args the command line arguments
@@ -345,6 +392,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuNovoChamado;
     public static javax.swing.JMenu menuRel;
     private javax.swing.JMenu menuSair;
+    private javax.swing.JMenu menuSobre;
     private javax.swing.JLabel txtData;
     public static javax.swing.JLabel txtUser;
     // End of variables declaration//GEN-END:variables
