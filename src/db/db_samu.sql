@@ -46,6 +46,6 @@ insert into tb_usuarios (nome_usuario,login_usuario,senha_usuario,perfil_usuario
 values ('alan','alan','12345','user');
 
 insert into tb_usuarios (nome_usuario,login_usuario,senha_usuario,perfil_usuario)
-values ('ilan','ilann','123','Admin');
+values ('Adiministrador','admin','samuadmin','Admin');
 
 DROP table tb_proficionais;

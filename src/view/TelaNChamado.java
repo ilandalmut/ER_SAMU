@@ -342,7 +342,7 @@ public class TelaNChamado extends javax.swing.JInternalFrame {
         txtAbertura.setText("25/11/2022   12:30:00");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setText("Chamado aberto em:");
+        jLabel5.setText("QTR - Chamado aberto em:");
 
         btSaida.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btSaida.setForeground(new java.awt.Color(204, 0, 51));
@@ -428,7 +428,8 @@ public class TelaNChamado extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtPacienteActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        TelaAjuda ajuda = new TelaAjuda();
+        ajuda.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void cbEnfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEnfActionPerformed
