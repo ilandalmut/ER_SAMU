@@ -36,16 +36,4 @@ dr varchar(100) not null
 );
 
 insert into tb_usuarios (nome_usuario,login_usuario,senha_usuario,perfil_usuario)
-values ('Ricardo','ricardo','123','admin');
-select * from tb_usuarios;
-
-insert into tb_usuarios (nome_usuario,login_usuario,senha_usuario,perfil_usuario)
-values ('ilan','ilan','123','admin');
-
-insert into tb_usuarios (nome_usuario,login_usuario,senha_usuario,perfil_usuario)
-values ('alan','alan','12345','user');
-
-insert into tb_usuarios (nome_usuario,login_usuario,senha_usuario,perfil_usuario)
 values ('Adiministrador','admin','samuadmin','Admin');
-
-DROP table tb_proficionais;

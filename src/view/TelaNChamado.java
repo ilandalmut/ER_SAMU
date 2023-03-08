@@ -156,7 +156,7 @@ public class TelaNChamado extends javax.swing.JInternalFrame {
     private void popularDR() {
         List<String> strList = new ArrayList<String>();
         
-        String sql = "select * from tb_profissionais where cargo_prof = 'DR' order by nome_prof";
+        String sql = "select * from tb_profissionais where cargo_prof = 'Médico' order by nome_prof";
         
         try{
             pst = conexao.prepareStatement(sql);
