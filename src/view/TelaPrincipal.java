@@ -47,6 +47,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuCad = new javax.swing.JMenu();
         menuCadProfissional = new javax.swing.JMenuItem();
         menuCadUsuario = new javax.swing.JMenuItem();
+        cadTrans = new javax.swing.JMenuItem();
         menuRel = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         menuSobre = new javax.swing.JMenu();
@@ -157,6 +158,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         menuCad.add(menuCadUsuario);
+
+        cadTrans.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.ALT_MASK));
+        cadTrans.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/ambulancia (1).png"))); // NOI18N
+        cadTrans.setText("Cadastrar Transporte");
+        cadTrans.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadTransActionPerformed(evt);
+            }
+        });
+        menuCad.add(cadTrans);
 
         jMenuBar1.add(menuCad);
 
@@ -355,6 +366,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         desktop.add(relatorio);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void cadTransActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadTransActionPerformed
+        TelaAutomovel transporte = new TelaAutomovel();
+        transporte.setVisible(true);
+        desktop.add(transporte);
+    }//GEN-LAST:event_cadTransActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -394,6 +411,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btNovoChamado;
     private javax.swing.JButton btProfissionais;
     public static javax.swing.JButton btRel;
+    private javax.swing.JMenuItem cadTrans;
     private javax.swing.JDesktopPane desktop;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

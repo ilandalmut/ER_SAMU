@@ -32,7 +32,7 @@ public class TelaNChamado extends javax.swing.JInternalFrame {
     }
     
     private void adicionar(){
-        String sql = "insert into tb_chamados(data_abertura,data_saida,nome_paciente,qth,ndo,tarm,mr,cond,enf,dr) values(?,?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into tb_chamados(data_abertura,data_saida,nome_paciente,qth,ndo,tarm,mr,cond,enf, tecenf, dr,transporte) values(?,?,?,?,?,?,?,?,?,?,?,?)";
         try{
             pst = conexao.prepareStatement(sql);
             pst.setString(1, txtAbertura.getText());
@@ -44,7 +44,10 @@ public class TelaNChamado extends javax.swing.JInternalFrame {
             pst.setString(7, cbMR.getSelectedItem().toString());
             pst.setString(8, cbCond.getSelectedItem().toString());
             pst.setString(9, cbEnf.getSelectedItem().toString());
-            pst.setString(10, cbDR.getSelectedItem().toString());
+            pst.setString(10, cbEnfTec.getSelectedItem().toString());
+            pst.setString(11, cbDR.getSelectedItem().toString());
+            pst.setString(12, cbTrans.getSelectedItem().toString());
+            
             
             if(txtQTH.getText().isEmpty() || txtSaida.getText().isEmpty()){
                 JOptionPane.showMessageDialog(null, "Os campos QTH e Registro de Saida, são obrigatórios!");
@@ -61,7 +64,9 @@ public class TelaNChamado extends javax.swing.JInternalFrame {
                     cbMR.setSelectedItem(null);
                     cbCond.setSelectedItem(null);
                     cbEnf.setSelectedItem(null);
+                    cbEnfTec.setSelectedItem(null);
                     cbDR.setSelectedItem(null);
+                    cbTrans.setSelectedItem(null);
                 }
             }
         }catch(Exception e){
@@ -132,10 +137,10 @@ public class TelaNChamado extends javax.swing.JInternalFrame {
         cbCond.setModel(defaultComboBox);
     }
     
-    private void popularEnftec() {
+    private void popularEnf() {
         List<String> strList = new ArrayList<String>();
         
-        String sql = "select * from tb_profissionais where cargo_prof = 'Enf' or cargo_prof = 'Téc. Enf' order by nome_prof";
+        String sql = "select * from tb_profissionais where cargo_prof = 'Enf'order by nome_prof";
         
         try{
             pst = conexao.prepareStatement(sql);
@@ -151,6 +156,28 @@ public class TelaNChamado extends javax.swing.JInternalFrame {
         }
         DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(strList.toArray());
         cbEnf.setModel(defaultComboBox);
+    }
+    
+   
+    private void popularEnftec() {
+        List<String> strList = new ArrayList<String>();
+        
+        String sql = "select * from tb_profissionais where cargo_prof = 'Téc. Enf' order by nome_prof";
+        
+        try{
+            pst = conexao.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            while(rs.next()){
+                
+                strList.add(rs.getString(2));
+       
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(strList.toArray());
+        cbEnfTec.setModel(defaultComboBox);
     }
     
     private void popularDR() {
@@ -172,6 +199,27 @@ public class TelaNChamado extends javax.swing.JInternalFrame {
         }
         DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(strList.toArray());
         cbDR.setModel(defaultComboBox);
+    }
+    
+    private void popularTrans() {
+        List<String> strList = new ArrayList<String>();
+        
+        String sql = "select * from tb_transporte";
+        
+        try{
+            pst = conexao.prepareStatement(sql);
+            rs = pst.executeQuery();
+            
+            while(rs.next()){
+                
+                strList.add(rs.getString(2));
+       
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel(strList.toArray());
+        cbTrans.setModel(defaultComboBox);
     }
     
     @SuppressWarnings("unchecked")
@@ -206,6 +254,10 @@ public class TelaNChamado extends javax.swing.JInternalFrame {
         jButton6 = new javax.swing.JButton();
         txtNDO = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
+        cbTrans = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
+        cbEnfTec = new javax.swing.JComboBox<>();
+        jLabel16 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -214,20 +266,20 @@ public class TelaNChamado extends javax.swing.JInternalFrame {
         setMinimumSize(new java.awt.Dimension(837, 586));
         setPreferredSize(new java.awt.Dimension(837, 586));
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
             }
             public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
             }
-            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
             }
             public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
             }
-            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
-                formInternalFrameOpened(evt);
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -240,21 +292,21 @@ public class TelaNChamado extends javax.swing.JInternalFrame {
                 txtPacienteActionPerformed(evt);
             }
         });
-        getContentPane().add(txtPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 111, 495, 34));
+        getContentPane().add(txtPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 111, 495, 34));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel10.setText("TARM:*");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 391, -1, -1));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 413, -1, -1));
 
         jLabel11.setText("Campo Obrigatório*");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(695, 91, -1, -1));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(675, 89, -1, -1));
 
         cbTarm.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
-        getContentPane().add(cbTarm, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 414, 133, 34));
+        getContentPane().add(cbTarm, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 436, 200, 34));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Paciente:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 88, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 88, -1, -1));
 
         jButton4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-ajuda-30.png"))); // NOI18N
@@ -264,7 +316,7 @@ public class TelaNChamado extends javax.swing.JInternalFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 470, 185, 59));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(606, 577, 185, 59));
 
         jPanel1.setBackground(new java.awt.Color(0, 51, 102));
 
@@ -279,7 +331,7 @@ public class TelaNChamado extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(693, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -289,13 +341,13 @@ public class TelaNChamado extends javax.swing.JInternalFrame {
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 875, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         cbMR.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
-        getContentPane().add(cbMR, new org.netbeans.lib.awtextra.AbsoluteConstraints(192, 414, 133, 34));
+        getContentPane().add(cbMR, new org.netbeans.lib.awtextra.AbsoluteConstraints(328, 436, 200, 34));
 
         cbCond.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
-        getContentPane().add(cbCond, new org.netbeans.lib.awtextra.AbsoluteConstraints(343, 414, 133, 34));
+        getContentPane().add(cbCond, new org.netbeans.lib.awtextra.AbsoluteConstraints(591, 436, 200, 34));
 
         cbEnf.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
         cbEnf.addActionListener(new java.awt.event.ActionListener() {
@@ -303,30 +355,30 @@ public class TelaNChamado extends javax.swing.JInternalFrame {
                 cbEnfActionPerformed(evt);
             }
         });
-        getContentPane().add(cbEnf, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 414, 133, 34));
+        getContentPane().add(cbEnf, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 511, 200, 34));
 
         cbDR.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
-        getContentPane().add(cbDR, new org.netbeans.lib.awtextra.AbsoluteConstraints(658, 414, 133, 34));
+        getContentPane().add(cbDR, new org.netbeans.lib.awtextra.AbsoluteConstraints(591, 511, 200, 34));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel12.setText("MR:*");
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(192, 391, -1, -1));
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(328, 413, -1, -1));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel13.setText("COND:*");
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(343, 391, -1, -1));
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(591, 413, -1, -1));
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel14.setText("ENF/TEC:*");
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 391, -1, -1));
+        jLabel14.setText("ENF:");
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 488, -1, -1));
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel15.setText("MÉDICO:*");
-        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(658, 391, -1, -1));
+        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(591, 488, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("QTH:*");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 151, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 151, -1, -1));
 
         txtQTH.setColumns(20);
         txtQTH.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
@@ -334,7 +386,7 @@ public class TelaNChamado extends javax.swing.JInternalFrame {
         txtQTH.setMargin(new java.awt.Insets(2, 8, 2, 2));
         jScrollPane1.setViewportView(txtQTH);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 174, 495, -1));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 174, 495, -1));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -386,20 +438,20 @@ public class TelaNChamado extends javax.swing.JInternalFrame {
                 .addComponent(btSaida, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtSaida, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(565, 111, -1, 194));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(556, 111, -1, -1));
 
         jButton5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-selecionado-20.png"))); // NOI18N
-        jButton5.setText("Registrar");
+        jButton5.setText("Salvar");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 471, 185, 59));
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 578, 185, 59));
 
         jButton6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-excluir-20.png"))); // NOI18N
@@ -409,18 +461,42 @@ public class TelaNChamado extends javax.swing.JInternalFrame {
                 jButton6ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 470, 185, 59));
+        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(321, 577, 185, 59));
 
         txtNDO.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
         txtNDO.setMargin(new java.awt.Insets(2, 8, 2, 2));
         txtNDO.setPreferredSize(new java.awt.Dimension(300, 22));
-        getContentPane().add(txtNDO, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 339, 495, 34));
+        getContentPane().add(txtNDO, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 348, 495, 34));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setText("Natureza da ocorrência:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(41, 316, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 323, -1, -1));
 
-        setBounds(0, 0, 837, 586);
+        cbTrans.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
+        getContentPane().add(cbTrans, new org.netbeans.lib.awtextra.AbsoluteConstraints(556, 347, 235, 34));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel7.setText("Transporte:");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(556, 323, -1, -1));
+
+        cbEnfTec.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
+        cbEnfTec.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cbEnfTecMouseClicked(evt);
+            }
+        });
+        cbEnfTec.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbEnfTecActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cbEnfTec, new org.netbeans.lib.awtextra.AbsoluteConstraints(328, 511, 200, 34));
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel16.setText("TEC ENF:*");
+        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(328, 488, -1, -1));
+
+        setBounds(0, 0, 837, 700);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPacienteActionPerformed
@@ -454,8 +530,10 @@ public class TelaNChamado extends javax.swing.JInternalFrame {
         popularTARM();
         popularMR();
         popularCond();
-        popularEnftec();
+        popularEnftec();     
+        popularEnf();
         popularDR();
+        popularTrans();
     }//GEN-LAST:event_formInternalFrameOpened
 
     private void btSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSaidaActionPerformed
@@ -467,14 +545,24 @@ public class TelaNChamado extends javax.swing.JInternalFrame {
         txtSaida.setText( formatador.format(data2) + " - " + hora2);
     }//GEN-LAST:event_btSaidaActionPerformed
 
+    private void cbEnfTecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEnfTecActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbEnfTecActionPerformed
+
+    private void cbEnfTecMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbEnfTecMouseClicked
+        
+    }//GEN-LAST:event_cbEnfTecMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btSaida;
     private javax.swing.JComboBox<String> cbCond;
     private javax.swing.JComboBox<String> cbDR;
     private javax.swing.JComboBox<String> cbEnf;
+    private javax.swing.JComboBox<String> cbEnfTec;
     private javax.swing.JComboBox<String> cbMR;
     private javax.swing.JComboBox<String> cbTarm;
+    private javax.swing.JComboBox<String> cbTrans;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
@@ -485,10 +573,12 @@ public class TelaNChamado extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

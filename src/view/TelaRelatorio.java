@@ -11,7 +11,6 @@ import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import javafx.scene.control.CheckBox;
 import javax.swing.JOptionPane;
 import model.ModuloConexao;
 import net.sf.jasperreports.engine.JasperCompileManager;
@@ -154,6 +153,30 @@ public class TelaRelatorio extends javax.swing.JInternalFrame {
             }
         }
     
+    private void total_registros_hoje(){
+        txtDataHoje.setVisible(false);
+        pegarAno();
+            String sql = "select count(*) from tb_chamados where data_abertura like ?";
+            
+            try{
+                conexao = ModuloConexao.connector();
+                pst = conexao.prepareStatement(sql);
+                pst.setString(1, txtDataHoje.getText() + "%");
+                rs = pst.executeQuery();
+                
+                if(rs.next()){
+                    
+                    String soma = rs.getString("count(*)");
+                txtTotalRHoje.setText(soma);
+                }
+                
+            }catch(Exception e){
+               
+            }
+        }
+    
+    
+    
     private void pegarAno(){
         Date date = new Date();
         SimpleDateFormat getYearFormat = new SimpleDateFormat("yy");
@@ -166,6 +189,13 @@ public class TelaRelatorio extends javax.swing.JInternalFrame {
         SimpleDateFormat getYearFormat = new SimpleDateFormat("/"+"MM");
         String currentYear = getYearFormat.format(date);
         txtDataMes.setText(currentYear);
+    }
+    
+    private void pegarHoje(){
+        Date date = new Date();
+        SimpleDateFormat getYearFormat = new SimpleDateFormat("dd"+"/");
+        String currentYear = getYearFormat.format(date);
+        txtDataHoje.setText(currentYear);
     }
     
     @SuppressWarnings("unchecked")
@@ -196,6 +226,10 @@ public class TelaRelatorio extends javax.swing.JInternalFrame {
         cbQth = new javax.swing.JCheckBox();
         cbSit = new javax.swing.JCheckBox();
         jLabel10 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        txtTotalRHoje = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        txtDataHoje = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -204,22 +238,23 @@ public class TelaRelatorio extends javax.swing.JInternalFrame {
         setMinimumSize(new java.awt.Dimension(837, 586));
         setPreferredSize(new java.awt.Dimension(837, 586));
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
-            }
             public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
                 formInternalFrameOpened(evt);
             }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
         });
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtabertura.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
         txtabertura.setMargin(new java.awt.Insets(2, 8, 2, 2));
@@ -229,6 +264,7 @@ public class TelaRelatorio extends javax.swing.JInternalFrame {
                 txtaberturaActionPerformed(evt);
             }
         });
+        getContentPane().add(txtabertura, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 493, 451, 45));
 
         BTRGERAL.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         BTRGERAL.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-pdf-2-30.png"))); // NOI18N
@@ -238,9 +274,11 @@ public class TelaRelatorio extends javax.swing.JInternalFrame {
                 BTRGERALActionPerformed(evt);
             }
         });
+        getContentPane().add(BTRGERAL, new org.netbeans.lib.awtextra.AbsoluteConstraints(513, 493, 200, 45));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Filtrar por:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 454, -1, -1));
 
         jPanel1.setBackground(new java.awt.Color(0, 51, 102));
 
@@ -255,7 +293,7 @@ public class TelaRelatorio extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jLabel3)
-                .addContainerGap(705, Short.MAX_VALUE))
+                .addContainerGap(984, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,9 +303,13 @@ public class TelaRelatorio extends javax.swing.JInternalFrame {
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
-        jLabel2.setText("(Para trazer todos os registros por ano, digite por exemplo: 23, para o ano de 2023)");
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, -1));
 
-        jLabel4.setText("(Para trazer todos os registros por mês, digite por exemplo: 02/23, para o mês 02 de 2023)");
+        jLabel2.setText("(Para trazer todos os registros por ano, digite por exemplo: 2023)");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(91, 322, -1, -1));
+
+        jLabel4.setText("(Para trazer todos os registros por mês, digite por exemplo: 02/2023, para o mês 02 de 2023)");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 344, -1, -1));
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 102));
 
@@ -286,9 +328,9 @@ public class TelaRelatorio extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel6)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(82, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(82, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(txtTotalRano)
                 .addGap(80, 80, 80))
         );
@@ -302,7 +344,10 @@ public class TelaRelatorio extends javax.swing.JInternalFrame {
                 .addContainerGap(50, Short.MAX_VALUE))
         );
 
-        jLabel5.setText("(Para trazer todos os registros por dia específico, digite por exemplo: 01/02/23, para o dia 01/02/2023)");
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 130, -1, -1));
+
+        jLabel5.setText("(Para trazer todos os registros por dia específico, digite por exemplo: 01/02/2023, para o dia 01/02/2023)");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 367, -1, -1));
 
         jPanel3.setBackground(new java.awt.Color(0, 102, 0));
 
@@ -337,6 +382,8 @@ public class TelaRelatorio extends javax.swing.JInternalFrame {
                 .addContainerGap(50, Short.MAX_VALUE))
         );
 
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 133, -1, -1));
+
         jPanel4.setBackground(new java.awt.Color(102, 0, 0));
 
         txtTotalRmes.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
@@ -367,8 +414,10 @@ public class TelaRelatorio extends javax.swing.JInternalFrame {
                 .addComponent(jLabel8)
                 .addGap(29, 29, 29)
                 .addComponent(txtTotalRmes)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
+
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 130, -1, 150));
 
         txtDataMes.setText("jTextField1");
         txtDataMes.addActionListener(new java.awt.event.ActionListener() {
@@ -376,6 +425,7 @@ public class TelaRelatorio extends javax.swing.JInternalFrame {
                 txtDataMesActionPerformed(evt);
             }
         });
+        getContentPane().add(txtDataMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 290, -1, -1));
 
         txtDataAno.setText("jTextField1");
         txtDataAno.addActionListener(new java.awt.event.ActionListener() {
@@ -383,9 +433,11 @@ public class TelaRelatorio extends javax.swing.JInternalFrame {
                 txtDataAnoActionPerformed(evt);
             }
         });
+        getContentPane().add(txtDataAno, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 290, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel9.setText("Filtro:");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 321, -1, -1));
 
         cbData.setText("Data");
         cbData.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -398,6 +450,7 @@ public class TelaRelatorio extends javax.swing.JInternalFrame {
                 cbDataActionPerformed(evt);
             }
         });
+        getContentPane().add(cbData, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 451, -1, -1));
 
         cbQth.setText("QTH (Endereço)");
         cbQth.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -410,6 +463,7 @@ public class TelaRelatorio extends javax.swing.JInternalFrame {
                 cbQthActionPerformed(evt);
             }
         });
+        getContentPane().add(cbQth, new org.netbeans.lib.awtextra.AbsoluteConstraints(204, 451, -1, -1));
 
         cbSit.setText("Situação");
         cbSit.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -422,90 +476,55 @@ public class TelaRelatorio extends javax.swing.JInternalFrame {
                 cbSitActionPerformed(evt);
             }
         });
+        getContentPane().add(cbSit, new org.netbeans.lib.awtextra.AbsoluteConstraints(343, 451, -1, -1));
 
         jLabel10.setText("(Para trazer todos os registros por qth, digite por exemplo: centro, para as ocorrências realizadas no bairro centro)");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 390, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(390, 390, 390)
-                .addComponent(txtDataAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(191, 191, 191)
-                .addComponent(txtDataMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(90, 90, 90)
-                .addComponent(jLabel4))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(cbData)
-                .addGap(18, 18, 18)
-                .addComponent(cbQth)
-                .addGap(18, 18, 18)
-                .addComponent(cbSit))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(txtabertura, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(BTRGERAL, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(90, 90, 90)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel5)))
+        jPanel5.setBackground(new java.awt.Color(102, 0, 153));
+
+        txtTotalRHoje.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        txtTotalRHoje.setForeground(new java.awt.Color(255, 255, 255));
+        txtTotalRHoje.setText("00");
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Registros de hoje");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel11)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(87, Short.MAX_VALUE)
+                .addComponent(txtTotalRHoje)
+                .addGap(73, 73, 73))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtDataAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDataMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(7, 7, 7)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel9))
-                .addGap(6, 6, 6)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel10)
-                .addGap(45, 45, 45)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(cbData)
-                    .addComponent(cbQth)
-                    .addComponent(cbSit))
-                .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtabertura, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BTRGERAL, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel11)
+                .addGap(29, 29, 29)
+                .addComponent(txtTotalRHoje)
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
-        setBounds(0, 0, 837, 586);
+        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 130, 200, -1));
+
+        txtDataHoje.setText("jTextField1");
+        txtDataHoje.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDataHojeActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtDataHoje, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 290, -1, -1));
+
+        setBounds(0, 0, 1110, 635);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtaberturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtaberturaActionPerformed
@@ -528,9 +547,11 @@ public class TelaRelatorio extends javax.swing.JInternalFrame {
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
         pegarAno();
         pegarmes();
+        pegarHoje();
         total_registros();
         total_registros_ano();
         total_registros_mes();
+        total_registros_hoje();
     }//GEN-LAST:event_formInternalFrameOpened
 
     private void txtDataMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataMesActionPerformed
@@ -577,6 +598,10 @@ public class TelaRelatorio extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_cbSitMouseClicked
 
+    private void txtDataHojeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataHojeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDataHojeActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTRGERAL;
@@ -585,6 +610,7 @@ public class TelaRelatorio extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox cbSit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -597,9 +623,12 @@ public class TelaRelatorio extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JTextField txtDataAno;
+    private javax.swing.JTextField txtDataHoje;
     private javax.swing.JTextField txtDataMes;
     private javax.swing.JLabel txtTotalR1;
+    private javax.swing.JLabel txtTotalRHoje;
     private javax.swing.JLabel txtTotalRano;
     private javax.swing.JLabel txtTotalRmes;
     private javax.swing.JTextField txtabertura;

@@ -2,7 +2,7 @@
 <!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="chamado" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="98251e46-9001-4c63-9328-7c7e7642b5f8">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="samu.xml"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="samu_db.xml"/>
 	<parameter name="id_chamado" class="java.lang.Integer"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT id_chamado,
@@ -17,7 +17,9 @@
 	mr,
 	cond,
 	enf,
-	dr
+	dr,
+	transporte,
+	tecenf
 FROM db_samu.tb_chamados where id_chamado =  $P{id_chamado}]]>
 	</queryString>
 	<field name="id_chamado" class="java.lang.Integer">
@@ -98,6 +100,18 @@ FROM db_samu.tb_chamados where id_chamado =  $P{id_chamado}]]>
 		<property name="com.jaspersoft.studio.field.tree.path" value="tb_chamados"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
+	<field name="transporte" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="transporte"/>
+		<property name="com.jaspersoft.studio.field.label" value="transporte"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="tb_chamados"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tecenf" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="tecenf"/>
+		<property name="com.jaspersoft.studio.field.label" value="tecenf"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="tb_chamados"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -126,7 +140,7 @@ FROM db_samu.tb_chamados where id_chamado =  $P{id_chamado}]]>
 				<text><![CDATA[SERVIÇO DE ATENDIMENTO MÓVEL DE URGÊNCIA - SAMU]]></text>
 			</staticText>
 			<image>
-				<reportElement x="6" y="0" width="92" height="82" uuid="56f57d9b-2890-4d75-9821-71176e2aa3ca"/>
+				<reportElement x="11" y="5" width="92" height="82" uuid="400bb461-d286-41e6-bd0f-f5080b4f1f0b"/>
 				<imageExpression><![CDATA["src/images/logo_samu_circulo.png"]]></imageExpression>
 			</image>
 		</band>
@@ -176,11 +190,11 @@ FROM db_samu.tb_chamados where id_chamado =  $P{id_chamado}]]>
 	<columnHeader>
 		<band height="135" splitType="Stretch">
 			<staticText>
-				<reportElement x="2" y="10" width="100" height="30" uuid="901c5adc-787e-41a6-889e-c25c21d25c71">
+				<reportElement x="2" y="10" width="130" height="30" uuid="901c5adc-787e-41a6-889e-c25c21d25c71">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1b7f57f1-8cfa-4d83-88df-579b6ff4df90"/>
 				</reportElement>
 				<textElement>
-					<font size="12"/>
+					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Nome do Paciente]]></text>
 			</staticText>
@@ -189,7 +203,7 @@ FROM db_samu.tb_chamados where id_chamado =  $P{id_chamado}]]>
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bd680ac8-a3a3-4191-a675-563327527b35"/>
 				</reportElement>
 				<textElement textAlignment="Left">
-					<font size="12"/>
+					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[QTH]]></text>
 			</staticText>
@@ -198,7 +212,7 @@ FROM db_samu.tb_chamados where id_chamado =  $P{id_chamado}]]>
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1b7f57f1-8cfa-4d83-88df-579b6ff4df90"/>
 				</reportElement>
 				<textElement>
-					<font size="12"/>
+					<font fontName="SansSerif" size="10" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nome_paciente}]]></textFieldExpression>
 			</textField>
@@ -207,7 +221,7 @@ FROM db_samu.tb_chamados where id_chamado =  $P{id_chamado}]]>
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bd680ac8-a3a3-4191-a675-563327527b35"/>
 				</reportElement>
 				<textElement>
-					<font size="12"/>
+					<font fontName="SansSerif" size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{qth}]]></textFieldExpression>
 			</textField>
@@ -218,10 +232,12 @@ FROM db_samu.tb_chamados where id_chamado =  $P{id_chamado}]]>
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="440" y="32" width="110" height="50" uuid="7f1e830c-be29-4acb-966a-05352a11299e">
+				<reportElement x="440" y="40" width="110" height="50" uuid="7f1e830c-be29-4acb-966a-05352a11299e">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f50f0f93-8bfe-4898-b3d4-59c7d80c156a"/>
 				</reportElement>
-				<textElement textAlignment="Right"/>
+				<textElement textAlignment="Right">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{cond}]]></textFieldExpression>
 			</textField>
 			<staticText>
@@ -229,12 +245,12 @@ FROM db_samu.tb_chamados where id_chamado =  $P{id_chamado}]]>
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b3d7c853-90ee-4e80-86cd-2e64ae796ed3"/>
 				</reportElement>
 				<textElement textAlignment="Right">
-					<font size="10"/>
+					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[COND]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="480" y="0" width="70" height="24" uuid="aa29edec-122e-4652-b0e9-873d96215f3d"/>
+				<reportElement x="480" y="0" width="70" height="14" uuid="aa29edec-122e-4652-b0e9-873d96215f3d"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
@@ -252,7 +268,7 @@ FROM db_samu.tb_chamados where id_chamado =  $P{id_chamado}]]>
 	<detail>
 		<band height="279" splitType="Stretch">
 			<textField>
-				<reportElement x="73" y="-2" width="475" height="30" uuid="992b3f0e-e2a6-4b1a-ae90-e50241696e83">
+				<reportElement x="73" y="-2" width="257" height="30" uuid="992b3f0e-e2a6-4b1a-ae90-e50241696e83">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="16d2fdfb-f533-49ed-952e-52e10e1100ad"/>
 				</reportElement>
 				<textFieldExpression><![CDATA[$F{ndo}]]></textFieldExpression>
@@ -261,7 +277,7 @@ FROM db_samu.tb_chamados where id_chamado =  $P{id_chamado}]]>
 				<reportElement x="9" y="187" width="539" height="40" uuid="21b50447-ea08-48fd-ae60-7fc3fd092679">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="02897eeb-ca50-43de-9694-a3aeec016644"/>
 				</reportElement>
-				<textFieldExpression><![CDATA[$F{observacao}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{observacao}!= null ? $F{observacao} : " "]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="4" y="77" width="90" height="40" uuid="79fb444c-787c-457f-9432-b6b3789c35f6">
@@ -269,7 +285,7 @@ FROM db_samu.tb_chamados where id_chamado =  $P{id_chamado}]]>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement>
-					<font size="11"/>
+					<font fontName="SansSerif" size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{tarm}]]></textFieldExpression>
 			</textField>
@@ -278,70 +294,70 @@ FROM db_samu.tb_chamados where id_chamado =  $P{id_chamado}]]>
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="59bd257b-5189-4f3e-8466-f3b66c9647bd"/>
 				</reportElement>
 				<textElement>
-					<font size="11"/>
+					<font fontName="SansSerif" size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{dr}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="159" y="77" width="90" height="40" uuid="403827f5-80d8-4c94-94c9-431eb1819997">
+				<reportElement x="138" y="77" width="90" height="40" uuid="403827f5-80d8-4c94-94c9-431eb1819997">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="07f5f31b-f35f-43f2-ab19-54ed5144eea0"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement>
-					<font size="11"/>
+					<font fontName="SansSerif" size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{mr}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="311" y="76" width="90" height="40" uuid="75b98640-444b-43ff-8d14-a26866904230">
+				<reportElement x="346" y="76" width="90" height="40" uuid="75b98640-444b-43ff-8d14-a26866904230">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="88dfd55b-b11a-44c0-a27c-a1d572e03235"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement>
-					<font size="11"/>
+					<font fontName="SansSerif" size="10"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{enf}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{enf} != null ? $F{enf} : " "]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="4" y="57" width="58" height="19" uuid="44b14afc-c0c7-4dd5-8477-9b7d316cbb56">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b3d7c853-90ee-4e80-86cd-2e64ae796ed3"/>
 				</reportElement>
 				<textElement>
-					<font size="10"/>
+					<font size="11"/>
 				</textElement>
 				<text><![CDATA[TARM]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="159" y="57" width="58" height="19" uuid="2c829064-3791-442e-bcf4-646f89ad2a06">
+				<reportElement x="138" y="57" width="58" height="19" uuid="2c829064-3791-442e-bcf4-646f89ad2a06">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b3d7c853-90ee-4e80-86cd-2e64ae796ed3"/>
 				</reportElement>
 				<textElement>
-					<font size="10"/>
+					<font size="11"/>
 				</textElement>
 				<text><![CDATA[MR]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="311" y="57" width="58" height="19" uuid="820794f7-b85b-482d-98fb-bf80fa0f0cef">
+				<reportElement x="346" y="57" width="58" height="19" uuid="820794f7-b85b-482d-98fb-bf80fa0f0cef">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b3d7c853-90ee-4e80-86cd-2e64ae796ed3"/>
 				</reportElement>
 				<textElement>
-					<font size="10"/>
+					<font size="11"/>
 				</textElement>
-				<text><![CDATA[ENF/TEC]]></text>
+				<text><![CDATA[ENF]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="159" y="36" width="40" height="32" uuid="bc3847a2-5c67-43aa-8043-42816e6bb6d0"/>
+				<reportElement x="138" y="36" width="40" height="32" uuid="bc3847a2-5c67-43aa-8043-42816e6bb6d0"/>
 				<textElement textAlignment="Left">
 					<font size="8"/>
 				</textElement>
 				<text><![CDATA[Médico Regulador]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="311" y="37" width="70" height="24" uuid="e19075f8-fc0e-4d60-8715-89fb521945e0"/>
+				<reportElement x="346" y="37" width="70" height="24" uuid="e19075f8-fc0e-4d60-8715-89fb521945e0"/>
 				<textElement textAlignment="Left">
 					<font size="8"/>
 				</textElement>
-				<text><![CDATA[Enfermeiro/Técnico em Enfermagem]]></text>
+				<text><![CDATA[Enfermeiro]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="4" y="36" width="100" height="32" uuid="bac0d55f-61bd-495d-8206-cdbebbb8f00b"/>
@@ -351,11 +367,11 @@ FROM db_samu.tb_chamados where id_chamado =  $P{id_chamado}]]>
 				<text><![CDATA[Técnico Auxiliar de Regulação Médica]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="461" y="57" width="58" height="19" uuid="c0f0810d-1be3-4a83-a655-1edb724f3bac">
+				<reportElement x="459" y="57" width="58" height="19" uuid="c0f0810d-1be3-4a83-a655-1edb724f3bac">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b3d7c853-90ee-4e80-86cd-2e64ae796ed3"/>
 				</reportElement>
 				<textElement>
-					<font size="10"/>
+					<font size="11"/>
 				</textElement>
 				<text><![CDATA[MÉDICO]]></text>
 			</staticText>
@@ -366,13 +382,13 @@ FROM db_samu.tb_chamados where id_chamado =  $P{id_chamado}]]>
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="73" y="127" width="475" height="22" uuid="c1fdd068-ba79-4180-a2fe-83d4dce2fa28">
+				<reportElement x="70" y="130" width="478" height="24" uuid="c1fdd068-ba79-4180-a2fe-83d4dce2fa28">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="20118ddd-94bc-48f8-b20c-4741f6397972"/>
 				</reportElement>
 				<textElement>
-					<font size="12"/>
+					<font size="10"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{situacao}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{situacao} != null ? $F{situacao} : " "]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="2" y="153" width="548" height="1" uuid="62a89acc-c464-425b-8a7c-d589e6710a43"/>
@@ -429,17 +445,52 @@ FROM db_samu.tb_chamados where id_chamado =  $P{id_chamado}]]>
 				<text><![CDATA[Natureza da Ocorrência:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="5" y="237" width="100" height="30" uuid="8d4c069f-10cf-4eb8-8d25-fe8d4900a1d1"/>
+				<reportElement x="6" y="237" width="100" height="30" uuid="8d4c069f-10cf-4eb8-8d25-fe8d4900a1d1"/>
 				<text><![CDATA[Dt./Hr. Impressão: ]]></text>
 			</staticText>
 			<textField pattern="dd MMMMM yyyy">
-				<reportElement x="90" y="237" width="100" height="30" uuid="f00c7a3f-952e-430f-9a08-a5715766b607"/>
+				<reportElement x="91" y="237" width="100" height="30" uuid="f00c7a3f-952e-430f-9a08-a5715766b607"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<textField pattern="HH:mm">
 				<reportElement x="190" y="237" width="100" height="30" uuid="c561ee7e-92cb-4ad5-b04b-49e00d00858d"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="399" y="-2" width="150" height="30" uuid="c8e1b42e-74c4-4943-b61e-e2bcbb30aa2f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="858ff0cd-9a54-485a-8ab1-f3e9b7842fc9"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{transporte} != null ? $F{transporte} : " "]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="337" y="-2" width="64" height="30" uuid="1070e825-2457-4015-b15a-a5a67609b1fa"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Transporte:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="240" y="76" width="100" height="40" uuid="e45b09a0-92b2-4128-8f71-af25ab6be2cd">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b04d6377-9099-4623-a78d-330224e40447"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{tecenf} != null ? $F{tecenf} : " "]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="240" y="57" width="58" height="19" uuid="a9aa99bb-a433-4545-9f8c-225a6b9ff6bc">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b3d7c853-90ee-4e80-86cd-2e64ae796ed3"/>
+				</reportElement>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[TEC ENF]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="240" y="36" width="80" height="32" uuid="ba3d1489-cdfb-4fb3-8d34-835910130d1c"/>
+				<textElement textAlignment="Left">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Técnico em Enfermagem]]></text>
+			</staticText>
 		</band>
 	</detail>
 	<columnFooter>

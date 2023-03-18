@@ -2,7 +2,7 @@
 <!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4_Landscape" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cfadb9ac-5172-4d9a-981e-68a6cb2dc0ed">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="samu.xml"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="samu_db.xml"/>
 	<parameter name="data_abertura" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT id_chamado,
@@ -17,7 +17,9 @@
 	mr,
 	cond,
 	enf,
-	dr
+	dr,
+	transporte,
+	tecenf
 FROM db_samu.tb_chamados
 WHERE data_abertura LIKE '%$P!{data_abertura}%']]>
 	</queryString>
@@ -99,26 +101,23 @@ WHERE data_abertura LIKE '%$P!{data_abertura}%']]>
 		<property name="com.jaspersoft.studio.field.tree.path" value="tb_chamados"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
+	<field name="transporte" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="transporte"/>
+		<property name="com.jaspersoft.studio.field.label" value="transporte"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="tb_chamados"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tecenf" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="tecenf"/>
+		<property name="com.jaspersoft.studio.field.label" value="tecenf"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="tb_chamados"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="98" splitType="Stretch">
-			<staticText>
-				<reportElement x="100" y="4" width="186" height="18" uuid="67018925-b21b-44d5-9292-fccd0d4bb6d9"/>
-				<textElement textAlignment="Left"/>
-				<text><![CDATA[PREFEITURA MUNICIPAL DE BALSAS]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="100" y="22" width="186" height="18" uuid="2b20effd-2143-4173-9148-933469c3f791"/>
-				<textElement textAlignment="Left"/>
-				<text><![CDATA[SECRETARIA MUNICIPAL DE SAÚDE]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="100" y="40" width="290" height="18" uuid="a1599667-a029-40ee-8942-4a3aa08ea3c2"/>
-				<textElement textAlignment="Left"/>
-				<text><![CDATA[SERVIÇO DE ATENDIMENTO MÓVEL DE URGÊNCIA - SAMU]]></text>
-			</staticText>
 			<staticText>
 				<reportElement x="310" y="72" width="180" height="20" uuid="87d76a93-2705-4147-ba8a-5fdaccd2917d"/>
 				<textElement textAlignment="Center">
@@ -131,17 +130,39 @@ WHERE data_abertura LIKE '%$P!{data_abertura}%']]>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="78" y="22" width="186" height="18" uuid="e33a89c0-773b-4a27-8546-653c3fff66e0"/>
+				<textElement textAlignment="Left"/>
+				<text><![CDATA[SECRETARIA MUNICIPAL DE SAÚDE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="78" y="40" width="290" height="18" uuid="2b3580cc-1488-4cea-9b37-eddf5e1a847d"/>
+				<textElement textAlignment="Left"/>
+				<text><![CDATA[SERVIÇO DE ATENDIMENTO MÓVEL DE URGÊNCIA - SAMU]]></text>
+			</staticText>
 			<image>
-				<reportElement x="6" y="0" width="92" height="82" uuid="e77b3e97-755f-4211-b51e-12903c530afc"/>
+				<reportElement x="8" y="0" width="68" height="58" uuid="757813cd-21f3-42fd-a664-80a94ca74105"/>
 				<imageExpression><![CDATA["src/images/logo_samu_circulo.png"]]></imageExpression>
 			</image>
+			<staticText>
+				<reportElement x="78" y="4" width="186" height="18" uuid="d3a26d98-76ac-4937-bc50-5e68a0ad62c8"/>
+				<textElement textAlignment="Left"/>
+				<text><![CDATA[PREFEITURA MUNICIPAL DE BALSAS]]></text>
+			</staticText>
 		</band>
 	</title>
 	<pageHeader>
 		<band height="4" splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="2" splitType="Stretch"/>
+		<band height="2" splitType="Stretch">
+			<staticText>
+				<reportElement x="54" y="0" width="100" height="2" uuid="7a4fd01d-cddb-46d3-9fcb-9b02d5af8934">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1cc957bf-24f4-4700-956c-c140132c745e"/>
+				</reportElement>
+				<text><![CDATA[transporte]]></text>
+			</staticText>
+		</band>
 	</columnHeader>
 	<detail>
 		<band height="150" splitType="Stretch">
@@ -229,7 +250,7 @@ WHERE data_abertura LIKE '%$P!{data_abertura}%']]>
 				<textElement textAlignment="Left">
 					<font size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[ENF/TEC]]></text>
+				<text><![CDATA[ENF]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="732" y="10" width="70" height="20" uuid="f78d3c0a-b646-4da3-9679-e66bae640b10">
@@ -240,17 +261,17 @@ WHERE data_abertura LIKE '%$P!{data_abertura}%']]>
 				<textElement textAlignment="Left">
 					<font size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[MÉDICO]]></text>
+				<text><![CDATA[TEC ENF]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="90" width="50" height="20" uuid="4a0af47d-6ced-4efa-8a44-38c48e1caf56"/>
+				<reportElement x="138" y="90" width="70" height="20" uuid="4a0af47d-6ced-4efa-8a44-38c48e1caf56"/>
 				<textElement>
 					<font size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[SITUAÇÃO]]></text>
+				<text><![CDATA[TRANSPORTE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="140" y="90" width="70" height="20" uuid="c9a807a9-2557-4323-9f9d-1b1d5aa2614b">
+				<reportElement x="478" y="90" width="70" height="20" uuid="c9a807a9-2557-4323-9f9d-1b1d5aa2614b">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<textElement>
@@ -313,22 +334,22 @@ WHERE data_abertura LIKE '%$P!{data_abertura}%']]>
 				<textFieldExpression><![CDATA[$F{enf}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="732" y="30" width="70" height="50" uuid="705329de-a96e-4dee-88c9-10f7273870f1">
+				<reportElement x="0" y="110" width="120" height="30" uuid="705329de-a96e-4dee-88c9-10f7273870f1">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="083a359f-8071-4d73-b9a9-9383e9b100a4"/>
 				</reportElement>
 				<textFieldExpression><![CDATA[$F{dr}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="110" width="130" height="30" uuid="1e875ff4-5766-4a27-940f-de9f3b751b4e">
+				<reportElement x="278" y="110" width="180" height="30" uuid="1e875ff4-5766-4a27-940f-de9f3b751b4e">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="23c94001-993b-4e24-8abd-ecb02614f325"/>
 				</reportElement>
-				<textFieldExpression><![CDATA[$F{situacao}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{situacao} != null ? $F{situacao} : " "]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="140" y="110" width="662" height="30" uuid="a51df702-a167-47e3-9630-c38352ac5f49">
+				<reportElement x="478" y="110" width="322" height="30" uuid="a51df702-a167-47e3-9630-c38352ac5f49">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b3203710-645c-4c62-9c8a-e515691f83e8"/>
 				</reportElement>
-				<textFieldExpression><![CDATA[$F{observacao}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{observacao} != null ? $F{observacao} : " "]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="0" y="5" width="801" height="1" uuid="837a5761-921c-4873-b336-b5fd89394b9b"/>
@@ -336,6 +357,32 @@ WHERE data_abertura LIKE '%$P!{data_abertura}%']]>
 					<pen lineWidth="2.0"/>
 				</graphicElement>
 			</line>
+			<staticText>
+				<reportElement x="278" y="90" width="50" height="20" uuid="3e8170ef-d1a1-424e-9b52-b150b1d68dea"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SITUAÇÃO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="140" y="110" width="128" height="30" uuid="eef19ac5-1140-4fd5-914d-fe17524580af">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1cc957bf-24f4-4700-956c-c140132c745e"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{transporte}!= null ? $F{transporte} : " "]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="90" width="70" height="20" uuid="66266cb7-cfdf-4061-9ca5-63053f6ce784"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MEDICO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="732" y="30" width="70" height="50" uuid="c193cdde-0298-4c12-b2e6-aec6963e7f27">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="13336281-2c66-401f-95fc-732ccd0b52c5"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{tecenf}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<columnFooter>

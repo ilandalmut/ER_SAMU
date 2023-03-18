@@ -32,8 +32,12 @@ tarm varchar(100) not null,
 mr varchar(100) not null,
 cond varchar(100) not null,
 enf varchar(100) not null,
-dr varchar(100) not null
+dr varchar(100) not null,
+transporte VARCHAR(60) NULL
 );
+
+ALTER TABLE db_samu.tb_chamados
+ADD transporte VARCHAR(60) NULL;
 
 insert into tb_usuarios (nome_usuario,login_usuario,senha_usuario,perfil_usuario)
 values ('Adiministrador','admin','samuadmin','Admin');

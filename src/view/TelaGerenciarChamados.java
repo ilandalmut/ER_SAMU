@@ -52,7 +52,7 @@ public class TelaGerenciarChamados extends javax.swing.JInternalFrame {
     }
 
     private void pesquisar(){
-        String sql = "select id_chamado as Código, data_abertura as Abertura, data_saida as Saída, nome_paciente as Paciente, qth as QTH, ndo as Natureza, tarm as TARM, mr as MR, cond as COND, enf as ENF_TEC, dr as MÉDICO from tb_Chamados where nome_paciente like ? or tarm like ? or mr like ? or cond like ? or enf like ? or qth like ? or dr like ? or situacao like ?";
+        String sql = "select id_chamado as Código, data_abertura as Abertura, data_saida as Saída, nome_paciente as Paciente, qth as QTH, ndo as Natureza, tarm as TARM, mr as MR, cond as COND, enf as ENF, tecenf as TEC, dr as MÉDICO, transporte as Transporte from tb_Chamados where nome_paciente like ? or tarm like ? or mr like ? or cond like ? or enf like ? or qth like ? or dr like ? or situacao like ? or transporte like ? ORDER BY id_chamado DESC";
         try {
             conexao = ModuloConexao.connector();
             pst = conexao.prepareStatement(sql);
@@ -64,6 +64,8 @@ public class TelaGerenciarChamados extends javax.swing.JInternalFrame {
             pst.setString(6, txtPesquisar.getText() + "%");
             pst.setString(7, txtPesquisar.getText() + "%");
             pst.setString(8, txtPesquisar.getText() + "%");
+            pst.setString(9, txtPesquisar.getText() + "%");
+            
             rs = pst.executeQuery();
             tbChamado.setModel(DbUtils.resultSetToTableModel(rs));
         } catch(SQLException e){
@@ -139,22 +141,23 @@ public class TelaGerenciarChamados extends javax.swing.JInternalFrame {
         setMinimumSize(new java.awt.Dimension(837, 586));
         setPreferredSize(new java.awt.Dimension(837, 586));
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
-            }
             public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
                 formInternalFrameOpened(evt);
             }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
         });
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-selecionado-20.png"))); // NOI18N
@@ -164,6 +167,7 @@ public class TelaGerenciarChamados extends javax.swing.JInternalFrame {
                 jButton3ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 484, 170, 45));
 
         txtID.setEditable(false);
         txtID.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -174,9 +178,11 @@ public class TelaGerenciarChamados extends javax.swing.JInternalFrame {
                 txtIDActionPerformed(evt);
             }
         });
+        getContentPane().add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(81, 370, 68, 34));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel9.setText("Código:");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 378, -1, -1));
 
         jPanel1.setBackground(new java.awt.Color(0, 51, 102));
 
@@ -191,7 +197,7 @@ public class TelaGerenciarChamados extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel3)
-                .addContainerGap(619, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,6 +207,8 @@ public class TelaGerenciarChamados extends javax.swing.JInternalFrame {
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 917, -1));
+
         tbChamado = new javax.swing.JTable(){
             public boolean isCellEditable(int rowIndex, int colIndex){
                 return false;
@@ -208,13 +216,13 @@ public class TelaGerenciarChamados extends javax.swing.JInternalFrame {
         };
         tbChamado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Código", "Abertura", "Saida", "Paciente", "QTH", "Natureza", "TARM", "MR", "COND", "ENF/TEC", "DR"
+                "Código", "Abertura", "Saida", "Paciente", "QTH", "Natureza", "TARM", "MR", "COND", "ENF", "TEC ENF", "Medico", "Transporte"
             }
         ));
         tbChamado.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -224,6 +232,8 @@ public class TelaGerenciarChamados extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tbChamado);
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 138, 868, 213));
+
         txtSituacao.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
         txtSituacao.setMargin(new java.awt.Insets(2, 8, 2, 2));
         txtSituacao.setPreferredSize(new java.awt.Dimension(300, 22));
@@ -232,18 +242,23 @@ public class TelaGerenciarChamados extends javax.swing.JInternalFrame {
                 txtSituacaoActionPerformed(evt);
             }
         });
+        getContentPane().add(txtSituacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(244, 369, 170, 34));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel10.setText("Situação:");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(175, 378, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel11.setText("Observações:");
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 378, -1, -1));
 
         txtObservacao.setColumns(20);
         txtObservacao.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
         txtObservacao.setRows(5);
         txtObservacao.setMargin(new java.awt.Insets(2, 8, 2, 2));
         jScrollPane2.setViewportView(txtObservacao);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 369, 360, 161));
 
         jButton5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-pdf-2-30.png"))); // NOI18N
@@ -253,6 +268,7 @@ public class TelaGerenciarChamados extends javax.swing.JInternalFrame {
                 jButton5ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(227, 483, 220, 47));
 
         txtPesquisar.setFont(new java.awt.Font("Monospaced", 0, 18)); // NOI18N
         txtPesquisar.setMargin(new java.awt.Insets(2, 8, 2, 2));
@@ -262,6 +278,7 @@ public class TelaGerenciarChamados extends javax.swing.JInternalFrame {
                 txtPesquisarActionPerformed(evt);
             }
         });
+        getContentPane().add(txtPesquisar, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 86, 197, 34));
 
         btBuscar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-pesquisar-20.png"))); // NOI18N
@@ -270,72 +287,9 @@ public class TelaGerenciarChamados extends javax.swing.JInternalFrame {
                 btBuscarActionPerformed(evt);
             }
         });
+        getContentPane().add(btBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(237, 86, 41, 34));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel9)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(26, 26, 26)
-                                            .addComponent(jLabel10)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(txtSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(jLabel11))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(35, 35, 35)
-                                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(0, 0, Short.MAX_VALUE)))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 780, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9)
-                            .addComponent(txtSituacao, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel11))
-                        .addGap(79, 79, 79)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane2))
-                .addContainerGap())
-        );
-
-        setBounds(0, 0, 837, 586);
+        setBounds(0, 0, 933, 597);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

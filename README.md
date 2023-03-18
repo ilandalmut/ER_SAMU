@@ -33,12 +33,13 @@ Para execução do sistema com o banco de dados crie um usuário root e a senha 
 ### Layout
 
 Tela Chamado
-![Tela Chamado](https://github.com/ilandalmut/ER_SAMU/blob/main/src/images/tela1.PNG)
+![Tela Chamado](https://github.com/brunoalvesmo/er_samu/blob/main/src/images/tela1.PNG)
 
 Tela Relatório
-![Tela Relatório](https://github.com/ilandalmut/ER_SAMU/blob/main/src/images/tela2.PNG)
+![Tela Relatório](https://github.com/brunoalvesmo/er_samu/blob/main/src/images/tela2.PNG)
 
 ### License
 MIT
 Free Software, Hell Yeah!
+
 
